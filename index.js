@@ -1,89 +1,49 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
+const studentGrid = document.getElementById("studentGrid");
+const studentCount = document.getElementById("studentCount");
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+function studentWord(count) {
+  const lastTwoDigits = count % 100;
+  const lastDigit = count % 10;
 
-  <title>РЕМС-44 — студентські портфоліо</title>
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+    return "студентів";
+  }
 
-  <meta
-    name="description"
-    content="Портфоліо студентів групи РЕМС-44 кафедри режисури естради і шоу КНУКіМ."
-  >
+  if (lastDigit === 1) {
+    return "студент";
+  }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return "студенти";
+  }
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  return "студентів";
+}
 
-  <link rel="stylesheet" href="styles.css">
-</head>
+students.forEach((student) => {
+  const card = document.createElement("a");
 
-<body>
+  card.className = "student-card";
+  card.href = `student.html?id=${encodeURIComponent(student.id)}`;
 
-  <header class="hero">
-
-    <nav class="nav">
-      <a class="logo" href="index.html">РЕМС-44</a>
-      <a class="nav-link" href="#students">Студенти</a>
-    </nav>
-
-    <div class="hero-content">
-      <p class="eyebrow">
-        Київський національний університет культури і мистецтв
-      </p>
-
-      <h1>
-        Режисура<br>
-        естради і шоу
-      </h1>
-
-      <p class="intro">
-        Портфоліо студентів групи РЕМС-44.
-        Майбутні режисери концертів, шоу, сценічних номерів,
-        перформансів і культурно-мистецьких подій.
-      </p>
-
-      <a class="button" href="#students">
-        Переглянути портфоліо
-      </a>
+  card.innerHTML = `
+    <div class="student-photo-wrapper">
+      <img
+        class="student-image"
+        src="${student.photo}"
+        alt="${student.name}"
+        loading="lazy"
+      >
     </div>
 
-  </header>
+    <div class="student-card-info">
+      <h3>${student.name}</h3>
+      <p>${student.role}</p>
+    </div>
+  `;
 
-  <main>
+  studentGrid.appendChild(card);
+});
 
-    <section class="students-section" id="students">
-
-      <div class="section-heading">
-        <div>
-          <p class="section-label">РЕМС-44</p>
-          <h2>Студенти</h2>
-        </div>
-
-        <p class="student-count" id="studentCount"></p>
-      </div>
-
-      <div class="student-grid" id="studentGrid"></div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <p>РЕМС-44 · КНУКіМ</p>
-    <p>Студентські портфоліо · 2026</p>
-  </footer>
-
-  <script src="students.js"></script>
-  <script src="index.js"></script>
-
-</body>
-</html>
+studentCount.textContent =
+  `${students.length} ${studentWord(students.length)}`;
