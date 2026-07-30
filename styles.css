@@ -82,16 +82,16 @@ select {
   background:
     linear-gradient(
       90deg,
-      rgba(5, 6, 8, 0.94) 0%,
-      rgba(5, 6, 8, 0.79) 42%,
-      rgba(5, 6, 8, 0.28) 100%
+      rgba(5, 6, 8, 0.9) 0%,
+      rgba(5, 6, 8, 0.69) 42%,
+      rgba(5, 6, 8, 0.14) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.05) 0%,
-      rgba(0, 0, 0, 0.62) 100%
+      rgba(0, 0, 0, 0.03) 0%,
+      rgba(0, 0, 0, 0.46) 100%
     ),
-    url("images/ChatGPT Image 30 лип. 2026 р., 15_49_20.png");
+    url("images/hero-bg.png");
 
   background-size: cover;
   background-position: center;
@@ -104,7 +104,7 @@ select {
   position: absolute;
   inset: auto 0 0 0;
 
-  height: 220px;
+  height: 190px;
 
   pointer-events: none;
 
@@ -112,7 +112,7 @@ select {
     linear-gradient(
       180deg,
       rgba(9, 10, 12, 0) 0%,
-      rgba(9, 10, 12, 0.82) 68%,
+      rgba(9, 10, 12, 0.72) 65%,
       #090a0c 100%
     );
 }
@@ -832,10 +832,10 @@ footer p {
 }
 
 /* -------------------------------------------------- */
-/* ПЛАНШЕТ */
+/* НЕВЕЛИКИЙ НОУТБУК */
 /* -------------------------------------------------- */
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .student-grid {
     grid-template-columns:
       repeat(3, minmax(0, 1fr));
@@ -843,8 +843,62 @@ footer p {
 
   .student-profile {
     grid-template-columns:
-      minmax(300px, 0.9fr)
-      minmax(0, 1.1fr);
+      minmax(330px, 0.76fr)
+      minmax(0, 1.24fr);
+  }
+
+  .profile-text-column {
+    padding:
+      56px
+      46px
+      86px;
+  }
+}
+
+/* -------------------------------------------------- */
+/* ПЛАНШЕТ */
+/* -------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .student-profile {
+    grid-template-columns:
+      minmax(300px, 0.7fr)
+      minmax(0, 1.3fr);
+  }
+
+  .large-profile-image {
+    min-height: 680px;
+  }
+
+  .profile-text-column {
+    padding:
+      48px
+      36px
+      76px;
+  }
+
+  .profile-name {
+    font-size: clamp(48px, 6.5vw, 78px);
+  }
+
+  .profile-divider {
+    margin: 42px 0;
+  }
+
+  .profile-section {
+    max-width: 860px;
+    margin-top: 44px;
+  }
+
+  .videos-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+  .video-card h3 {
+    font-size: 15px;
   }
 }
 
@@ -854,25 +908,40 @@ footer p {
 
 @media (max-width: 820px) {
   .hero {
-    min-height: 90vh;
+    min-height: 94vh;
 
     padding-bottom: 48px;
 
     background:
       linear-gradient(
         180deg,
-        rgba(5, 6, 8, 0.3) 0%,
-        rgba(5, 6, 8, 0.82) 68%,
+        rgba(5, 6, 8, 0.04) 0%,
+        rgba(5, 6, 8, 0.14) 38%,
+        rgba(5, 6, 8, 0.62) 78%,
         #090a0c 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(5, 6, 8, 0.34) 0%,
+        rgba(5, 6, 8, 0.05) 75%
       ),
       url("images/hero-bg.png");
 
     background-size: cover;
-    background-position: 65% center;
+    background-position: 72% center;
+    background-repeat: no-repeat;
   }
 
   .hero::after {
-    height: 140px;
+    height: 105px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9, 10, 12, 0) 0%,
+        rgba(9, 10, 12, 0.58) 60%,
+        #090a0c 100%
+      );
   }
 
   .hero h1 {
@@ -892,22 +961,36 @@ footer p {
     display: block;
   }
 
-  .large-profile-image {
-    height: auto;
-    min-height: 0;
+  .profile-image-column {
+    max-height: 680px;
+    overflow: hidden;
+  }
 
-    aspect-ratio: 3 / 4;
+  .large-profile-image {
+    width: 100%;
+    height: auto;
+
+    min-height: 0;
+    max-height: 680px;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+    object-position: center 20%;
   }
 
   .profile-text-column {
     padding:
       55px
-      24px
+      28px
       80px;
   }
 
   .videos-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
   }
 
   .gallery-grid {
@@ -922,12 +1005,35 @@ footer p {
 
 @media (max-width: 540px) {
   .hero {
-    min-height: 88vh;
+    min-height: 92vh;
 
     padding:
       22px
       20px
       42px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 6, 8, 0.02) 0%,
+        rgba(5, 6, 8, 0.08) 34%,
+        rgba(5, 6, 8, 0.55) 73%,
+        #090a0c 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(5, 6, 8, 0.28) 0%,
+        rgba(5, 6, 8, 0) 78%
+      ),
+      url("images/hero-bg.png");
+
+    background-size: auto 100%;
+    background-position: 68% center;
+    background-repeat: no-repeat;
+  }
+
+  .hero::after {
+    height: 90px;
   }
 
   .nav {
@@ -945,6 +1051,8 @@ footer p {
   .eyebrow {
     margin-bottom: 18px;
 
+    max-width: 330px;
+
     font-size: 9px;
     line-height: 1.75;
   }
@@ -955,10 +1063,16 @@ footer p {
   }
 
   .intro {
+    max-width: 340px;
+
     margin: 30px 0;
 
     font-size: 15px;
     line-height: 1.6;
+
+    text-shadow:
+      0 2px 14px
+      rgba(0, 0, 0, 0.8);
   }
 
   .button {
@@ -1013,6 +1127,25 @@ footer p {
     padding: 20px;
   }
 
+  .profile-image-column {
+    max-height: none;
+  }
+
+  .large-profile-image {
+    max-height: none;
+
+    aspect-ratio: 3 / 4;
+
+    object-position: center top;
+  }
+
+  .profile-text-column {
+    padding:
+      48px
+      20px
+      72px;
+  }
+
   .profile-name {
     font-size: clamp(50px, 16vw, 76px);
   }
@@ -1023,6 +1156,11 @@ footer p {
 
   .profile-section {
     margin-top: 44px;
+  }
+
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .gallery-grid {
