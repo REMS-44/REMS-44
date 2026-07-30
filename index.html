@@ -3,28 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="REMS-44">
-  <title>РЕМС-44 — молоді режисери</title>
+  <meta name="description" content="Портфоліо студентів режисури естради і шоу РЕМС-44">
+  <meta name="theme-color" content="#090a0c">
+  <title>РЕМС-44 — портфоліо студентів</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <a class="logo" href="#">РЕМС</a>
-      <a class="nav-link" href="#students">Студенти</a>
+  <header class="hero" id="top">
+    <nav class="site-nav">
+      <a class="brand" href="#top">РЕМС—44</a>
+      <div class="nav-links">
+        <a href="#students">Студенти</a>
+        <a href="#about">Про проєкт</a>
+      </div>
     </nav>
 
-    <div class="hero-content">
+    <div class="hero-copy">
       <p class="eyebrow">КНУКіМ · режисура естради і шоу</p>
-      <h1>REMS-44</h1>
-      <p class="intro">
-        Знайомтеся зі студентами, їхніми творчими здобутками,
-        досвідом і реалізованими проєктами.
+      <h1>МОЛОДІСТЬ</h1>
+      <p class="hero-intro">
+        Портфоліо студентів РЕМС-44: режисерські роботи, відео,
+        проєкти, професійні інтереси та творчі пошуки.
       </p>
-      <a class="button" href="#students">Переглянути портфоліо</a>
+      <a class="primary-button" href="#students">Переглянути студентів</a>
     </div>
   </header>
 
@@ -32,27 +37,39 @@
     <section class="students-section" id="students">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Команда</p>
-          <h2>Наші студенти</h2>
+          <p class="section-label">Творча майстерня</p>
+          <h2>Студенти</h2>
         </div>
-        <p id="student-count" class="student-count"></p>
+        <p class="student-count" id="studentCount">0 студентів</p>
       </div>
 
-      <div id="student-grid" class="student-grid"></div>
+      <div class="student-grid" id="studentGrid"></div>
+    </section>
+
+    <section class="about-section" id="about">
+      <p class="section-label">Про проєкт</p>
+      <div class="about-grid">
+        <h2>Кожен профіль — окреме творче портфоліо.</h2>
+        <div class="about-text">
+          <p>
+            На головній сторінці залишається компактний каталог студентів.
+            Натискання на картку відкриває повноцінну персональну сторінку.
+          </p>
+          <p>
+            У профілі можна додавати розгорнуту біографію, проєкти,
+            YouTube-відео, галерею та посилання на соціальні мережі.
+          </p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>РЕМС-44 · Київ · 2026</p>
-    <p>Навчальне портфоліо студентів</p>
+    <p>РЕМС-44 · КНУКіМ</p>
+    <p>Портфоліо студентів · 2026</p>
   </footer>
 
-  <dialog id="profile-dialog" class="profile-dialog">
-    <button class="close-button" aria-label="Закрити" onclick="closeProfile()">×</button>
-    <div id="profile-content"></div>
-  </dialog>
-
   <script src="students.js"></script>
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0c">
+  <title>Профіль студента — РЕМС-44</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="profile-page">
+  <nav class="profile-nav">
+    <a class="brand" href="index.html">РЕМС—44</a>
+    <a class="back-link" href="index.html#students">← Усі студенти</a>
+  </nav>
+
+  <main id="studentProfile" class="student-profile" hidden>
+    <section class="profile-hero">
+      <div class="profile-portrait-wrap">
+        <img id="studentPhoto" class="profile-portrait" alt="">
+      </div>
+
+      <div class="profile-heading">
+        <p class="section-label">Портфоліо студента</p>
+        <h1 id="studentName"></h1>
+        <p id="studentRole" class="profile-role"></p>
+        <div id="socialLinks" class="social-links"></div>
+      </div>
+    </section>
+
+    <section class="profile-content">
+      <article class="bio-block">
+        <p class="section-label">Про студента</p>
+        <div id="studentBio" class="rich-text"></div>
+      </article>
+
+      <aside class="facts-block">
+        <p class="section-label">Коротко</p>
+        <dl id="studentFacts" class="facts-list"></dl>
+      </aside>
+    </section>
+
+    <section id="projectsSection" class="portfolio-section">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Вибрані роботи</p>
+          <h2>Проєкти</h2>
+        </div>
+      </div>
+      <div id="projectsGrid" class="projects-grid"></div>
+    </section>
+
+    <section id="videosSection" class="portfolio-section dark-section">
+      <div class="section-heading dark-heading">
+        <div>
+          <p class="section-label">Відео</p>
+          <h2>YouTube</h2>
+        </div>
+      </div>
+      <div id="videosGrid" class="videos-grid"></div>
+    </section>
+
+    <section id="gallerySection" class="portfolio-section">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Фото</p>
+          <h2>Галерея</h2>
+        </div>
+      </div>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+  </main>
+
+  <section id="notFound" class="not-found" hidden>
+    <p class="section-label">Помилка</p>
+    <h1>Профіль не знайдено</h1>
+    <a class="primary-button" href="index.html">Повернутися на головну</a>
+  </section>
+
+  <footer>
+    <p>РЕМС-44 · КНУКіМ</p>
+    <p>Портфоліо студентів · 2026</p>
+  </footer>
+
+  <script src="students.js"></script>
+  <script src="student.js"></script>
+</body>
+</html>
