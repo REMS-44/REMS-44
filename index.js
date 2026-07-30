@@ -1,34 +1,89 @@
-const studentGrid = document.getElementById("studentGrid");
-const studentCount = document.getElementById("studentCount");
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
 
-function studentWord(count) {
-  const n = count % 100;
-  const last = count % 10;
-  if (n >= 11 && n <= 14) return "студентів";
-  if (last === 1) return "студент";
-  if (last >= 2 && last <= 4) return "студенти";
-  return "студентів";
-}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-students.forEach((student) => {
-  const card = document.createElement("a");
-  card.className = "student-card";
-  card.href = `student.html?id=${encodeURIComponent(student.id)}`;
+  <title>РЕМС-44 — студентські портфоліо</title>
 
-  const image = document.createElement("img");
-  image.className = "student-image";
-  image.src = student.photo;
-  image.alt = student.name;
-  image.loading = "lazy";
+  <meta
+    name="description"
+    content="Портфоліо студентів групи РЕМС-44 кафедри режисури естради і шоу КНУКіМ."
+  >
 
-  const name = document.createElement("h3");
-  name.textContent = student.name;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  const role = document.createElement("p");
-  role.textContent = student.role;
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-  card.append(image, name, role);
-  studentGrid.append(card);
-});
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-studentCount.textContent = `${students.length} ${studentWord(students.length)}`;
+<body>
+
+  <header class="hero">
+
+    <nav class="nav">
+      <a class="logo" href="index.html">РЕМС-44</a>
+      <a class="nav-link" href="#students">Студенти</a>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">
+        Київський національний університет культури і мистецтв
+      </p>
+
+      <h1>
+        Режисура<br>
+        естради і шоу
+      </h1>
+
+      <p class="intro">
+        Портфоліо студентів групи РЕМС-44.
+        Майбутні режисери концертів, шоу, сценічних номерів,
+        перформансів і культурно-мистецьких подій.
+      </p>
+
+      <a class="button" href="#students">
+        Переглянути портфоліо
+      </a>
+    </div>
+
+  </header>
+
+  <main>
+
+    <section class="students-section" id="students">
+
+      <div class="section-heading">
+        <div>
+          <p class="section-label">РЕМС-44</p>
+          <h2>Студенти</h2>
+        </div>
+
+        <p class="student-count" id="studentCount"></p>
+      </div>
+
+      <div class="student-grid" id="studentGrid"></div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>РЕМС-44 · КНУКіМ</p>
+    <p>Студентські портфоліо · 2026</p>
+  </footer>
+
+  <script src="students.js"></script>
+  <script src="index.js"></script>
+
+</body>
+</html>
