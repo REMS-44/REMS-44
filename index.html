@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Портфоліо студентів режисури подій, перформансів і шоу">
+  <title>РЕМС — молоді режисери</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <a class="logo" href="#">РЕМС</a>
+      <a class="nav-link" href="#students">Студенти</a>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">КНУКіМ · режисура</p>
+      <h1>Молоді режисери<br>подій, перформансів і шоу</h1>
+      <p class="intro">
+        Знайомтеся зі студентами, їхніми творчими напрямами,
+        досвідом і реалізованими проєктами.
+      </p>
+      <a class="button" href="#students">Переглянути портфоліо</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="students-section" id="students">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Команда</p>
+          <h2>Наші студенти</h2>
+        </div>
+        <p id="student-count" class="student-count"></p>
+      </div>
+
+      <div id="student-grid" class="student-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>РЕМС · Київ · 2026</p>
+    <p>Навчальне портфоліо студентів</p>
+  </footer>
+
+  <dialog id="profile-dialog" class="profile-dialog">
+    <button class="close-button" aria-label="Закрити" onclick="closeProfile()">×</button>
+    <div id="profile-content"></div>
+  </dialog>
+
+  <script src="students.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
