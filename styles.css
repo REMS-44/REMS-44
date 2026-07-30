@@ -91,7 +91,7 @@ select {
       rgba(0, 0, 0, 0.03) 0%,
       rgba(0, 0, 0, 0.46) 100%
     ),
-    url("images/ChatGPT Image 30 лип. 2026 р., 15_49_20.png");
+    url("images/hero-bg.png");
 
   background-size: cover;
   background-position: center;
