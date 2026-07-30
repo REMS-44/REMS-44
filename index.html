@@ -1,75 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Портфоліо студентів режисури естради і шоу РЕМС-44">
-  <meta name="theme-color" content="#090a0c">
-  <title>РЕМС-44 — портфоліо студентів</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>РЕМС-44 — студентські портфоліо</title>
+
+  <meta
+    name="description"
+    content="Портфоліо студентів групи РЕМС-44 кафедри режисури естради і шоу КНУКіМ."
+  >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <header class="hero" id="top">
-    <nav class="site-nav">
-      <a class="brand" href="#top">РЕМС—44</a>
-      <div class="nav-links">
-        <a href="#students">Студенти</a>
-        <a href="#about">Про проєкт</a>
-      </div>
+
+  <header class="hero">
+
+    <nav class="nav">
+      <a class="logo" href="index.html">РЕМС-44</a>
+      <a class="nav-link" href="#students">Студенти</a>
     </nav>
 
-    <div class="hero-copy">
-      <p class="eyebrow">КНУКіМ · режисура естради і шоу</p>
-      <h1>МОЛОДІСТЬ</h1>
-      <p class="hero-intro">
-        Портфоліо студентів РЕМС-44: режисерські роботи, відео,
-        проєкти, професійні інтереси та творчі пошуки.
+    <div class="hero-content">
+      <p class="eyebrow">
+        Київський національний університет культури і мистецтв
       </p>
-      <a class="primary-button" href="#students">Переглянути студентів</a>
+
+      <h1>
+        Режисура<br>
+        естради і шоу
+      </h1>
+
+      <p class="intro">
+        Портфоліо студентів групи РЕМС-44.
+        Майбутні режисери концертів, шоу, сценічних номерів,
+        перформансів і культурно-мистецьких подій.
+      </p>
+
+      <a class="button" href="#students">
+        Переглянути портфоліо
+      </a>
     </div>
+
   </header>
 
   <main>
+
     <section class="students-section" id="students">
+
       <div class="section-heading">
         <div>
-          <p class="section-label">Творча майстерня</p>
+          <p class="section-label">РЕМС-44</p>
           <h2>Студенти</h2>
         </div>
-        <p class="student-count" id="studentCount">0 студентів</p>
+
+        <p class="student-count" id="studentCount"></p>
       </div>
 
       <div class="student-grid" id="studentGrid"></div>
+
     </section>
 
-    <section class="about-section" id="about">
-      <p class="section-label">Про проєкт</p>
-      <div class="about-grid">
-        <h2>Кожен профіль — окреме творче портфоліо.</h2>
-        <div class="about-text">
-          <p>
-            На головній сторінці залишається компактний каталог студентів.
-            Натискання на картку відкриває повноцінну персональну сторінку.
-          </p>
-          <p>
-            У профілі можна додавати розгорнуту біографію, проєкти,
-            YouTube-відео, галерею та посилання на соціальні мережі.
-          </p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <p>РЕМС-44 · КНУКіМ</p>
-    <p>Портфоліо студентів · 2026</p>
+    <p>Студентські портфоліо · 2026</p>
   </footer>
 
   <script src="students.js"></script>
   <script src="index.js"></script>
+
 </body>
 </html>
