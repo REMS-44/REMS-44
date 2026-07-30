@@ -31,7 +31,7 @@ const students = [
     videos: [
       {
         title: "Відеоробота",
-        youtube: ""
+        youtube: "https://www.youtube.com/watch?v=58ZgRSbX6tU"
       }
     ],
 
