@@ -1,0 +1,310 @@
+
+/* REMS-44 · profile redesign v3.1
+   Dedicated styles for student.html so the profile never falls back to a white/default page. */
+
+body.profile-page{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(101,70,255,.11), transparent 28%),
+    radial-gradient(circle at 10% 42%, rgba(216,255,53,.035), transparent 22%),
+    #090a0c;
+  color:#fff;
+  font-family:"Manrope",Arial,sans-serif;
+}
+
+.profile-page .profile-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:18px clamp(20px,4vw,58px);
+  background:rgba(9,10,12,.86);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  backdrop-filter:blur(18px);
+}
+
+.profile-page .profile-header .logo,
+.profile-page .profile-header .back-link{
+  color:#fff;
+  text-decoration:none;
+}
+
+.profile-page #studentProfile{
+  width:min(1440px,100%);
+  margin:0 auto;
+  padding:clamp(22px,4vw,56px);
+}
+
+.profile-page .student-profile{
+  display:grid;
+  grid-template-columns:minmax(280px,430px) minmax(0,1fr);
+  gap:clamp(28px,4vw,64px);
+  min-height:0;
+  align-items:start;
+}
+
+.profile-page .profile-image-column{
+  position:sticky;
+  top:94px;
+  align-self:start;
+  overflow:hidden;
+  min-width:0;
+  background:#121318;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  box-shadow:0 24px 70px rgba(0,0,0,.34);
+}
+
+.profile-page .profile-image-column::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 58%,rgba(0,0,0,.18));
+  box-shadow:none;
+}
+
+.profile-page .large-profile-image{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  max-height:650px;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:center 20%;
+  background:#121318;
+}
+
+.profile-page .profile-text-column{
+  min-width:0;
+  padding:4px 0 56px;
+}
+
+.profile-page .profile-group{
+  margin:0 0 14px;
+  color:#d8ff35;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:10px;
+  font-weight:800;
+}
+
+.profile-page .profile-name{
+  margin:0;
+  max-width:900px;
+  color:#fff;
+  font-size:clamp(46px,6vw,92px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.profile-page .profile-speciality{
+  margin:20px 0 0;
+  max-width:720px;
+  color:rgba(255,255,255,.62);
+  font-size:clamp(16px,1.5vw,20px);
+  line-height:1.55;
+}
+
+.profile-page .profile-divider{
+  width:100%;
+  height:1px;
+  margin:34px 0 0;
+  background:rgba(255,255,255,.10);
+}
+
+.profile-page .profile-section{
+  max-width:none;
+  margin-top:18px;
+  padding:24px 26px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+  background:rgba(255,255,255,.032);
+}
+
+.profile-page .profile-section:first-of-type{
+  margin-top:26px;
+}
+
+.profile-page .profile-section h2{
+  margin:0 0 16px;
+  color:rgba(255,255,255,.68);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:10px;
+  line-height:1.3;
+  font-weight:800;
+}
+
+.profile-page .profile-bio{
+  max-width:820px;
+  color:rgba(255,255,255,.86);
+  font-size:clamp(16px,1.35vw,19px);
+  line-height:1.72;
+}
+
+.profile-page .profile-bio p{
+  margin:0 0 14px;
+}
+
+.profile-page .profile-bio p:last-child{
+  margin-bottom:0;
+}
+
+.profile-page .skills-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.profile-page .skill-item{
+  min-height:36px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  color:rgba(255,255,255,.88);
+  font-size:12px;
+  line-height:1.2;
+}
+
+.profile-page .achievements-list{
+  margin:0;
+  padding-left:20px;
+  color:rgba(255,255,255,.84);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.profile-page .videos-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.profile-page .video-card{
+  min-width:0;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+}
+
+.profile-page .video-frame{
+  overflow:hidden;
+  border-radius:10px;
+  border:0;
+}
+
+.profile-page .video-card h3{
+  margin:11px 2px 2px;
+  color:rgba(255,255,255,.9);
+  font-size:14px;
+}
+
+.profile-page .gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.profile-page .gallery-image{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border-radius:10px;
+  background:#121318;
+}
+
+.profile-page .social-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.profile-page .social-button{
+  min-height:40px;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+}
+
+.profile-page .social-button:hover{
+  background:#fff;
+  color:#111;
+}
+
+.profile-page footer{
+  width:min(1440px,100%);
+  margin:0 auto;
+  padding:24px clamp(20px,4vw,58px) 34px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:transparent;
+}
+
+.profile-page .not-found{
+  min-height:60vh;
+  display:grid;
+  align-content:center;
+  gap:12px;
+}
+
+@media(max-width:900px){
+  .profile-page #studentProfile{
+    padding:24px;
+  }
+  .profile-page .student-profile{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  .profile-page .profile-image-column{
+    position:relative;
+    top:auto;
+    width:min(520px,100%);
+  }
+  .profile-page .large-profile-image{
+    max-height:620px;
+    aspect-ratio:4/5;
+  }
+}
+
+@media(max-width:620px){
+  .profile-page .profile-header{
+    padding:16px 18px;
+  }
+  .profile-page #studentProfile{
+    padding:18px;
+  }
+  .profile-page .student-profile{
+    gap:22px;
+  }
+  .profile-page .profile-image-column{
+    border-radius:16px;
+  }
+  .profile-page .large-profile-image{
+    max-height:none;
+    aspect-ratio:4/5;
+  }
+  .profile-page .profile-name{
+    font-size:clamp(42px,13vw,66px);
+  }
+  .profile-page .profile-section{
+    padding:20px;
+    border-radius:15px;
+  }
+  .profile-page .videos-grid,
+  .profile-page .gallery-grid{
+    grid-template-columns:1fr;
+  }
+}
