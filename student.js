@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js";
+import { getPublicStudents } from "./public-data.js?v=3";
 const profileContainer=document.getElementById("studentProfile");
 const params=new URLSearchParams(window.location.search);
 const studentId=params.get("id");
@@ -122,7 +122,7 @@ if (!student) {
       <div class="profile-image-column">
         <img
           class="large-profile-image"
-          src="${student.photo}"
+          src="${student.photoData || student.photo}"
           alt="${student.name}"
         >
       </div>
