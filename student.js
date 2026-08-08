@@ -1,9 +1,9 @@
-const profileContainer = document.getElementById("studentProfile");
-
-const params = new URLSearchParams(window.location.search);
-const studentId = params.get("id");
-
-const student = students.find((item) => item.id === studentId);
+import { getPublicStudents } from "./public-data.js";
+const profileContainer=document.getElementById("studentProfile");
+const params=new URLSearchParams(window.location.search);
+const studentId=params.get("id");
+const students=await getPublicStudents(window.REMS44_STUDENTS||[]);
+const student=students.find(item=>item.id===studentId);
 
 function getYoutubeId(url) {
   if (!url) return "";

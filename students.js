@@ -1,4 +1,4 @@
-const students = [
+window.REMS44_STUDENTS = [
   {
     id: "vintsiuk-andrii",
     name: "Вінцюк Андрій",
