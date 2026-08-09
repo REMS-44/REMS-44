@@ -1445,3 +1445,298 @@ footer p {
     font-size: 15px;
   }
 }
+
+
+/* -------------------------------------------------- */
+/* REMS-44 v4.0.4 — LIGHTER / MORE ELEGANT HERO */
+/* -------------------------------------------------- */
+
+.hero-content-v404 {
+  grid-template-columns: minmax(360px, 1.05fr) minmax(500px, .95fr);
+  gap: clamp(54px, 7vw, 110px);
+}
+
+.hero-content-v404 .hero-copy-v403 {
+  max-width: 690px;
+}
+
+.hero-content-v404 .hero-copy-v403 h1 {
+  font-size: clamp(72px, 8.5vw, 128px);
+}
+
+.hero-content-v404 .hero-description {
+  max-width: 470px;
+  margin-top: 22px;
+  font-size: 15px;
+}
+
+.hero-sections-v404 {
+  gap: 11px;
+  max-width: 620px;
+  justify-self: end;
+}
+
+.hero-sections-v404 .hero-section-card {
+  min-height: 132px;
+  padding: 18px 18px 17px;
+  grid-template-columns: 26px minmax(0,1fr) 32px;
+  gap: 10px;
+
+  border-radius: 16px;
+  border-color: rgba(255,255,255,.18);
+
+  background:
+    linear-gradient(145deg, rgba(13,14,18,.62), rgba(9,10,13,.34));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 12px 32px rgba(0,0,0,.11);
+
+  backdrop-filter: blur(8px);
+}
+
+.hero-sections-v404 .hero-section-card::before {
+  opacity: .72;
+}
+
+.hero-sections-v404 .hero-section-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.34);
+  box-shadow: 0 18px 44px rgba(0,0,0,.20);
+}
+
+.hero-sections-v404 .hero-section-number {
+  font-size: 9px;
+  opacity: .8;
+}
+
+.hero-sections-v404 .hero-section-card h2 {
+  margin-bottom: 6px;
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+
+.hero-sections-v404 .hero-section-card p {
+  max-width: 260px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255,255,255,.52);
+}
+
+.hero-sections-v404 .hero-section-arrow {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  border-color: rgba(255,255,255,.20);
+}
+
+.hero-sections-v404 .hero-section-students {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(57,102,255,.10), transparent 28%),
+    linear-gradient(145deg, rgba(13,14,18,.62), rgba(9,10,13,.34));
+}
+
+.hero-sections-v404 .hero-section-works {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(204,255,65,.065), transparent 28%),
+    linear-gradient(145deg, rgba(13,14,18,.62), rgba(9,10,13,.34));
+}
+
+.hero-sections-v404 .hero-section-projects {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(181,95,255,.08), transparent 28%),
+    linear-gradient(145deg, rgba(13,14,18,.62), rgba(9,10,13,.34));
+}
+
+.hero-sections-v404 .hero-section-industry {
+  border-color: rgba(235,170,50,.55);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(235,170,50,.11), transparent 30%),
+    linear-gradient(145deg, rgba(18,15,11,.62), rgba(9,10,13,.35));
+}
+
+.hero-sections-v404 .hero-section-industry:hover {
+  border-color: rgba(235,170,50,.82);
+}
+
+.hero-sections-v404 .hero-section-industry .hero-section-arrow {
+  border-color: rgba(235,170,50,.42);
+}
+
+@media (max-width: 1100px) {
+  .hero-content-v404 {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-sections-v404 {
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-sections-v404 {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .hero-sections-v404 .hero-section-card {
+    min-height: 126px;
+    padding: 15px;
+    grid-template-columns: 22px minmax(0,1fr) 28px;
+  }
+
+  .hero-sections-v404 .hero-section-card h2 {
+    font-size: 20px;
+  }
+
+  .hero-sections-v404 .hero-section-card p {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-sections-v404 {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==================================================
+   REMS-44 v4.0.5 — THREE SECTION CINEMATIC HERO
+   ================================================== */
+
+.hero-content-v404 {
+  grid-template-columns: minmax(430px, 1.15fr) minmax(390px, .72fr);
+  gap: clamp(72px, 8vw, 140px);
+  align-items: center;
+}
+
+.hero-copy-v403 {
+  max-width: 650px;
+}
+
+.hero-copy-v403 h1 {
+  font-size: clamp(78px, 8.6vw, 136px);
+  line-height: .86;
+  letter-spacing: -.055em;
+}
+
+.hero-description {
+  max-width: 500px;
+  line-height: 1.55;
+}
+
+/* Three clean cards, no icons, no special gold card */
+.hero-sections-v404 {
+  grid-template-columns: 1fr !important;
+  gap: 14px;
+  max-width: 500px;
+  width: 100%;
+  justify-self: end;
+}
+
+.hero-sections-v404 .hero-section-card {
+  min-height: 142px;
+  padding: 22px 22px 20px;
+  grid-template-columns: 38px minmax(0,1fr) 34px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 16px;
+  background: rgba(7,8,10,.48);
+  box-shadow: none;
+  backdrop-filter: blur(5px);
+}
+
+.hero-sections-v404 .hero-section-card::before {
+  display: none !important;
+}
+
+.hero-sections-v404 .hero-section-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.46);
+  background: rgba(10,11,14,.64);
+}
+
+.hero-sections-v404 .hero-section-card h2 {
+  font-size: clamp(23px, 2vw, 31px);
+  line-height: 1.02;
+  margin-bottom: 9px;
+}
+
+.hero-sections-v404 .hero-section-card p {
+  max-width: 320px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255,255,255,.64);
+}
+
+.hero-sections-v404 .hero-section-number {
+  font-size: 10px;
+  color: rgba(255,255,255,.7);
+}
+
+.hero-sections-v404 .hero-section-arrow {
+  border: 0 !important;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  color: rgba(255,255,255,.85);
+}
+
+/* Remove old individual color accents */
+.hero-sections-v404 .hero-section-students,
+.hero-sections-v404 .hero-section-projects,
+.hero-sections-v404 .hero-section-industry {
+  border-color: rgba(255,255,255,.22) !important;
+  background: rgba(7,8,10,.48) !important;
+}
+
+/* Make sure chair/background remains visible behind layout */
+.hero-v403::after {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.50) 0%,
+    rgba(0,0,0,.22) 38%,
+    rgba(0,0,0,.06) 58%,
+    rgba(0,0,0,.18) 100%
+  );
+}
+
+/* Small upper institutional label */
+.hero-kicker-v403 {
+  max-width: 560px;
+  line-height: 1.45;
+  letter-spacing: .06em;
+}
+
+@media (max-width: 1100px) {
+  .hero-content-v404 {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .hero-sections-v404 {
+    max-width: 680px;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content-v404 {
+    gap: 28px;
+  }
+  .hero-copy-v403 h1 {
+    font-size: clamp(62px, 21vw, 92px);
+  }
+  .hero-sections-v404 .hero-section-card {
+    min-height: 118px;
+    padding: 17px;
+    grid-template-columns: 28px minmax(0,1fr) 26px;
+  }
+  .hero-sections-v404 .hero-section-card p {
+    display: block;
+    font-size: 11px;
+  }
+}
