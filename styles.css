@@ -1867,3 +1867,78 @@ footer p {
     min-height: 112px;
   }
 }
+
+
+/* ==================================================
+   REMS-44 v4.0.7 — FINAL HERO BACKGROUND
+   expects: hero-director.png in repository root
+   ================================================== */
+
+.hero,
+.hero-v403 {
+  background-image: url("hero-director.png") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-color: #070708 !important;
+}
+
+/* Keep overlays subtle so the new chair remains visible */
+.hero-v403::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.62) 0%,
+      rgba(0,0,0,.42) 30%,
+      rgba(0,0,0,.10) 55%,
+      rgba(0,0,0,.10) 72%,
+      rgba(0,0,0,.24) 100%
+    ) !important;
+}
+
+/* Fine-tune composition around the new chair */
+.hero-content-v404 {
+  grid-template-columns: minmax(470px, 1.18fr) minmax(350px, .64fr);
+  gap: clamp(105px, 9vw, 165px);
+}
+
+.hero-sections-v404 {
+  max-width: 420px;
+  transform: translate(-20px, -18px);
+}
+
+/* Slightly smaller copy to keep the stage image visible */
+.hero-copy-v403 h1 {
+  font-size: clamp(76px, 8.2vw, 128px);
+}
+
+.hero-institution {
+  max-width: 560px;
+}
+
+.hero-space-title {
+  font-size: clamp(21px, 1.9vw, 29px);
+}
+
+.hero-copy-v403 .hero-description {
+  max-width: 520px;
+}
+
+/* Responsive cropping of the new image */
+@media (max-width: 1180px) {
+  .hero,
+  .hero-v403 {
+    background-position: 62% center !important;
+  }
+
+  .hero-sections-v404 {
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero,
+  .hero-v403 {
+    background-position: 68% center !important;
+  }
+}
