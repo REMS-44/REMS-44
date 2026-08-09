@@ -6,12 +6,29 @@ export async function getPublicStudents(fallbackStudents=[]){
   try{
     const app=initializeApp(REMS_FIREBASE_CONFIG);
     const db=getFirestore(app);
-    const snap=await getDocs(collection(db,"rems_public_profiles"));
-    const published=[];
-    snap.forEach(docSnap=>{
-      const data=docSnap.data();
-      if(data?.id && data?.published===true) published.push(data);
+
+    const [profilesSnap,mediaSnap]=await Promise.all([
+      getDocs(collection(db,"rems_public_profiles")),
+      getDocs(collection(db,"rems_student_media"))
+    ]);
+
+    const media={};
+    mediaSnap.forEach(docSnap=>{
+      const data=docSnap.data()||{};
+      if(data?.id) media[data.id]=data;
     });
+
+    const published=[];
+    profilesSnap.forEach(docSnap=>{
+      const data=docSnap.data()||{};
+      if(data?.id && data?.published===true){
+        published.push({
+          ...data,
+          photoData:media[data.id]?.photoData||""
+        });
+      }
+    });
+
     if(published.length){
       return published.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"uk"));
     }
