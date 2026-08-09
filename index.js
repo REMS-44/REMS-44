@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js?v=3";
+import { getPublicStudents } from "./public-data.js?v=4";
 const studentGrid=document.getElementById("studentGrid");
 const studentCount=document.getElementById("studentCount");
 const students=await getPublicStudents(window.REMS44_STUDENTS||[]);
