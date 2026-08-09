@@ -16,34 +16,9 @@ function getYoutubeId(url){
   const m=s.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/i);
   return m?.[1]||"";
 }
-function splitParagraphs(value){
+function normalizeLines(value){
   if(Array.isArray(value)) return value.map(x=>String(x).trim()).filter(Boolean);
-  return String(value||"").split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
-}
-function parseExperience(items){
-  const groups=[];
-  const defaultTitle="Досвід";
-  let current={title:defaultTitle,items:[]};
-
-  (Array.isArray(items)?items:[]).forEach(raw=>{
-    const line=String(raw||"").trim();
-    if(!line) return;
-    const isHeading =
-      line.length<80 &&
-      !/^[-•\d]/.test(line) &&
-      !/^https?:\/\//i.test(line) &&
-      !/\d{2}[./]\d{2}/.test(line) &&
-      !/\d{4}/.test(line);
-
-    if(isHeading){
-      if(current.items.length || current.title!==defaultTitle) groups.push(current);
-      current={title:line,items:[]};
-    }else{
-      current.items.push(line.replace(/^[-•]\s*/,""));
-    }
-  });
-  if(current.items.length || current.title!==defaultTitle) groups.push(current);
-  return groups.filter(g=>g.items.length);
+  return String(value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
 }
 function cleanExternalLinks(text){
   const links=[];
@@ -53,26 +28,138 @@ function cleanExternalLinks(text){
   }).replace(/\s{2,}/g," ").trim();
   return {text:stripped,links};
 }
+function looksLikeHeading(line){
+  const s=String(line||"").trim();
+  if(!s || s.length>90) return false;
+  if(/^https?:\/\//i.test(s)) return false;
+  if(/^[-•]/.test(s)) return false;
+  if(/^\d{1,2}[./]\d{1,2}[./]\d{2,4}/.test(s)) return false;
+  if(/^\d{4}/.test(s)) return false;
+  if(/[.!?]$/.test(s)) return false;
+
+  const words=s.split(/\s+/);
+  if(words.length<=7) return true;
+  return false;
+}
+function splitBioAndExperience(bioValue, achievements){
+  const bioLines=normalizeLines(bioValue);
+  const explicitExperience=Array.isArray(achievements)?achievements.map(x=>String(x).trim()).filter(Boolean):[];
+
+  const markerRegex=/^(досвід( роботи)?|професійний досвід|творчий досвід|проєктний досвід)$/i;
+  const idx=bioLines.findIndex(x=>markerRegex.test(x));
+
+  let bio=[];
+  let experience=[];
+
+  if(idx>=0){
+    bio=bioLines.slice(0,idx);
+    experience=bioLines.slice(idx+1);
+  }else{
+    // Keep descriptive paragraphs as "About me" until the first obvious role/heading/date.
+    let cut=-1;
+    for(let i=0;i<bioLines.length;i++){
+      const line=bioLines[i];
+      if(i>=2 && (
+        /^\d{1,2}[./]\d{1,2}[./]\d{2,4}/.test(line) ||
+        /^\d{4}/.test(line) ||
+        looksLikeHeading(line) && /асист|концерт|адміні|поет|журналіст|проєкт|організ|волонтер|стаж|досвід/i.test(line)
+      )){
+        cut=i; break;
+      }
+    }
+    if(cut>=0){
+      bio=bioLines.slice(0,cut);
+      experience=bioLines.slice(cut);
+    }else{
+      bio=bioLines;
+    }
+  }
+
+  // Append explicit experience field after text-derived experience.
+  if(explicitExperience.length) experience=[...experience,...explicitExperience];
+
+  // Merge tiny broken bio fragments back into proper paragraphs.
+  const mergedBio=[];
+  for(const line of bio){
+    if(!mergedBio.length){
+      mergedBio.push(line);
+      continue;
+    }
+    const prev=mergedBio[mergedBio.length-1];
+    const fragment=line.length<90 && !/[.!?]$/.test(prev);
+    if(fragment){
+      mergedBio[mergedBio.length-1]=`${prev} ${line}`.replace(/\s+/g," ").trim();
+    }else{
+      mergedBio.push(line);
+    }
+  }
+
+  return {bio:mergedBio,experience};
+}
+function parseExperienceGroups(items){
+  const lines=normalizeLines(items);
+  const groups=[];
+  let current={title:"Досвід",items:[]};
+
+  const pushCurrent=()=>{
+    if(current.items.length) groups.push(current);
+  };
+
+  for(const lineRaw of lines){
+    const line=String(lineRaw||"").trim();
+    if(!line) continue;
+
+    if(looksLikeHeading(line)){
+      pushCurrent();
+      current={title:line,items:[]};
+    }else{
+      current.items.push(line.replace(/^[-•]\s*/,""));
+    }
+  }
+  pushCurrent();
+
+  // If everything became headings and no items, treat lines as one list.
+  if(!groups.length && lines.length){
+    return [{title:"Досвід",items:lines}];
+  }
+  return groups;
+}
+function parseDateAndText(line){
+  const s=String(line||"").trim();
+  const m=s.match(/^((?:\d{1,2}[./]\d{1,2}(?:[./]\d{2,4})?)(?:\s*[-–—]\s*(?:\d{1,2}[./]\d{1,2}(?:[./]\d{2,4})?))?|\d{4})\s+(.*)$/);
+  if(!m) return {date:"",text:s};
+  return {date:m[1],text:m[2]};
+}
 function renderExperience(items){
-  const groups=parseExperience(items);
+  const groups=parseExperienceGroups(items);
   if(!groups.length) return "";
+
   return `<section class="portfolio-card">
     <h2>Досвід</h2>
     <div class="experience-groups">
       ${groups.map(group=>{
-        const linkItems=[];
-        const textItems=group.items.map(item=>{
+        const rows=[];
+        const links=[];
+        for(const item of group.items){
           const cleaned=cleanExternalLinks(item);
-          cleaned.links.forEach(url=>linkItems.push(url));
-          return cleaned.text;
-        }).filter(Boolean);
+          cleaned.links.forEach(url=>links.push(url));
+          if(cleaned.text){
+            const parsed=parseDateAndText(cleaned.text);
+            rows.push(parsed);
+          }
+        }
 
         return `<div class="experience-group">
           <h3>${esc(group.title)}</h3>
           <div>
-            ${textItems.length?`<ul class="experience-list">${textItems.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
-            ${linkItems.length?`<div class="clean-links" style="margin-top:12px">
-              ${linkItems.map((url,i)=>`<a class="clean-link" href="${esc(url)}" target="_blank" rel="noopener">Переглянути публікацію${linkItems.length>1?` ${i+1}`:""} ↗</a>`).join("")}
+            ${rows.length?`<div class="experience-timeline">
+              ${rows.map(row=>`<div class="experience-row">
+                <div class="experience-date">${row.date?esc(row.date):""}</div>
+                <div class="experience-text">${esc(row.text)}</div>
+              </div>`).join("")}
+            </div>`:""}
+            ${links.length?`<div class="clean-links" style="margin-top:12px">
+              ${links.map((url,i)=>`<a class="clean-link" href="${esc(url)}" target="_blank" rel="noopener">Переглянути публікацію${links.length>1?` ${i+1}`:""} ↗</a>`).join("")}
             </div>`:""}
           </div>
         </div>`;
@@ -106,9 +193,8 @@ function renderGallery(gallery){
 if(!student){
   profileContainer.innerHTML=`<div class="not-found"><h1>Студента не знайдено</h1><a href="index.html#students">← Усі студенти</a></div>`;
 }else{
-  const bio=splitParagraphs(student.bio);
+  const split=splitBioAndExperience(student.bio,student.achievements);
   const photo=student.photoData||student.photo||"";
-  const achievements=Array.isArray(student.achievements)?student.achievements:[];
   const skills=Array.isArray(student.skills)?student.skills:[];
 
   profileContainer.innerHTML=`
@@ -122,9 +208,9 @@ if(!student){
         <div class="profile-speciality">${esc(student.role||"Режисер/ка естради і шоу")}</div>
 
         <div class="portfolio-stack">
-          ${bio.length?`<section class="portfolio-card"><h2>Про себе</h2><div class="bio-copy">${bio.map(p=>`<p>${esc(p)}</p>`).join("")}</div></section>`:""}
+          ${split.bio.length?`<section class="portfolio-card"><h2>Про себе</h2><div class="bio-copy">${split.bio.map(p=>`<p>${esc(p)}</p>`).join("")}</div></section>`:""}
           ${skills.length?`<section class="portfolio-card"><h2>Навички та інтереси</h2><div class="skills-list">${skills.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:""}
-          ${renderExperience(achievements)}
+          ${renderExperience(split.experience)}
           ${renderVideos(student.videos)}
           ${renderGallery(student.gallery)}
           ${renderSocials(student.socials)}
