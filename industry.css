@@ -537,3 +537,94 @@ footer{max-width:1180px;margin:0 auto;padding:30px clamp(24px,5vw,70px);border-t
   }
   .compact-link-copy strong{font-size:13px}
 }
+
+
+/* v6.3 — elegant Instagram / TikTok embeds only */
+.social-media-block{
+  width:min(100%, 480px);
+  margin:30px auto;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:14px;
+  background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.012));
+}
+.social-media-head{
+  min-height:34px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:0 3px 10px;
+}
+.social-platform{
+  color:rgba(255,255,255,.78);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.social-media-head a{
+  color:rgba(255,255,255,.48);
+  text-decoration:none;
+  font-size:9px;
+  font-weight:700;
+}
+.social-media-head a:hover{color:var(--industry-accent)}
+
+.social-media-frame{
+  overflow:hidden;
+  border-radius:10px;
+  background:#fff;
+}
+.social-media-frame iframe{
+  width:100%;
+  display:block;
+  border:0;
+}
+
+/* Instagram — magazine-style vertical insert, not full-page */
+.social-media-block.instagram{
+  width:min(100%, 470px);
+}
+.social-media-block.instagram .social-media-frame{
+  height:610px;
+}
+.social-media-block.instagram iframe{
+  height:610px;
+}
+
+/* TikTok — phone-like, centered and narrow */
+.social-media-block.tiktok{
+  width:min(100%, 350px);
+}
+.social-media-block.tiktok .social-media-frame{
+  aspect-ratio:9/16;
+  background:#000;
+}
+.social-media-block.tiktok iframe{
+  height:100%;
+  aspect-ratio:9/16;
+  background:#000;
+}
+
+.social-media-block figcaption{
+  margin:10px 3px 2px;
+  color:rgba(255,255,255,.52);
+  font-size:11px;
+  line-height:1.5;
+}
+
+@media(max-width:680px){
+  .social-media-block{
+    margin:24px auto;
+    padding:9px;
+    border-radius:12px;
+  }
+  .social-media-block.instagram .social-media-frame,
+  .social-media-block.instagram iframe{
+    height:540px;
+  }
+  .social-media-head{
+    gap:10px;
+  }
+}

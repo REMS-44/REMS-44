@@ -104,14 +104,17 @@ function block(b){
     const label=embed?.kind==="instagram"?"Instagram":embed?.kind==="tiktok"?"TikTok":"Соціальна мережа";
 
     if(embed){
-      return `<figure class="social-wrap ${embed.kind}">
-        <div class="social-frame-shell">
+      return `<figure class="social-media-block ${embed.kind}">
+        <div class="social-media-head">
+          <span class="social-platform">${label}</span>
+          <a href="${esc(b.url)}" target="_blank" rel="noopener">Відкрити оригінал ↗</a>
+        </div>
+        <div class="social-media-frame">
           <iframe src="${esc(embed.src)}" title="${label}" loading="lazy"
             allow="encrypted-media; fullscreen; picture-in-picture"
             referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
         ${b.caption?`<figcaption>${esc(b.caption)}</figcaption>`:""}
-        <a class="article-inline-link" href="${esc(b.url)}" target="_blank" rel="noopener">Відкрити в ${label} ↗</a>
       </figure>`;
     }
 
