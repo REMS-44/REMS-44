@@ -1,4 +1,4 @@
-import {getMeetings} from "./industry-data.js?v=4";
+import {getMeetings} from "./industry-data.js?v=5";
 const grid=document.getElementById("meetingGrid"), sort=document.getElementById("meetingSort");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=d=>{if(!d)return"";const [y,m,day]=d.split("-");return `${day}.${m}.${y}`};

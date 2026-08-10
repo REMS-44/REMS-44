@@ -1,4 +1,4 @@
-import {getMeeting} from "./industry-data.js?v=4";
+import {getMeeting} from "./industry-data.js?v=5";
 const root=document.getElementById("article"), id=new URLSearchParams(location.search).get("id");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=d=>{if(!d)return"";const [y,m,day]=d.split("-");return `${day}.${m}.${y}`};
