@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
-<rect width="800" height="1000" fill="#262626"/>
-<circle cx="400" cy="330" r="150" fill="#f5f2ea" opacity=".13"/>
-<path d="M130 1000c20-250 120-390 270-390s250 140 270 390" fill="#f5f2ea" opacity=".13"/>
-<text x="400" y="890" text-anchor="middle" font-family="Arial, sans-serif" font-size="96" font-weight="700" fill="#f5f2ea">СМ</text>
-</svg>
