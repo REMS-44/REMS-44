@@ -115,11 +115,13 @@ function block(b){
       </figure>`;
     }
 
-    return `<a class="article-link-card social-link-card" href="${esc(b.url)}" target="_blank" rel="noopener">
-      <span class="link-card-kicker">Соціальна мережа</span>
-      <strong>${esc(b.caption||hostname(b.url)||"Відкрити публікацію")}</strong>
-      <span>${esc(hostname(b.url))}</span>
-      <b>Відкрити ↗</b>
+    return `<a class="article-inline-card social-inline" href="${esc(b.url)}" target="_blank" rel="noopener">
+      <div class="inline-card-main">
+        <span class="inline-card-type">Соціальна мережа</span>
+        <strong>${esc(b.caption||hostname(b.url)||"Відкрити публікацію")}</strong>
+        <small>${esc(hostname(b.url))}</small>
+      </div>
+      <span class="inline-card-arrow">↗</span>
     </a>`;
   }
 
@@ -135,25 +137,26 @@ function block(b){
 
   if(b.type==="file"){
     if(!b.url) return "";
-    return `<a class="article-file-card" href="${esc(b.url)}" target="_blank" rel="noopener">
-      <div class="file-icon">PDF</div>
-      <div class="file-copy">
-        <span>Матеріал до зустрічі</span>
+    return `<a class="article-inline-card file-inline" href="${esc(b.url)}" target="_blank" rel="noopener">
+      <div class="inline-card-icon">PDF</div>
+      <div class="inline-card-main">
+        <span class="inline-card-type">Файл / матеріал</span>
         <strong>${esc(b.content||fileLabel(b.url))}</strong>
-        ${b.caption?`<p>${esc(b.caption)}</p>`:""}
+        ${b.caption?`<small>${esc(b.caption)}</small>`:`<small>${esc(fileLabel(b.url))}</small>`}
       </div>
-      <div class="file-arrow">↗</div>
+      <span class="inline-card-arrow">↗</span>
     </a>`;
   }
 
   if(b.type==="link"){
     if(!b.url) return "";
-    return `<a class="article-link-card" href="${esc(b.url)}" target="_blank" rel="noopener">
-      <span class="link-card-kicker">Посилання</span>
-      <strong>${esc(b.content||hostname(b.url)||"Відкрити")}</strong>
-      ${b.caption?`<p>${esc(b.caption)}</p>`:""}
-      <span>${esc(hostname(b.url))}</span>
-      <b>Перейти ↗</b>
+    return `<a class="article-inline-card link-inline" href="${esc(b.url)}" target="_blank" rel="noopener">
+      <div class="inline-card-main">
+        <span class="inline-card-type">Посилання</span>
+        <strong>${esc(b.content||hostname(b.url)||"Відкрити")}</strong>
+        ${b.caption?`<small>${esc(b.caption)}</small>`:`<small>${esc(hostname(b.url))}</small>`}
+      </div>
+      <span class="inline-card-arrow">↗</span>
     </a>`;
   }
 

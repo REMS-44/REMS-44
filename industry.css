@@ -463,3 +463,114 @@ footer{max-width:1180px;margin:0 auto;padding:30px clamp(24px,5vw,70px);border-t
     margin-right:0;
   }
 }
+
+
+/* v6.1 — compact editorial links/files/social cards */
+.article-inline-card{
+  max-width:720px;
+  margin:18px auto;
+  padding:13px 15px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  transition:border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.article-inline-card:hover{
+  border-color:rgba(217,255,56,.42);
+  background:rgba(217,255,56,.035);
+  transform:translateY(-1px);
+}
+.inline-card-main{
+  min-width:0;
+  flex:1;
+  display:grid;
+  gap:3px;
+}
+.inline-card-type{
+  color:rgba(255,255,255,.36);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-size:8px;
+  font-weight:800;
+}
+.inline-card-main strong{
+  font-size:14px;
+  line-height:1.35;
+  letter-spacing:-.015em;
+}
+.inline-card-main small{
+  color:rgba(255,255,255,.46);
+  font-size:10px;
+  line-height:1.4;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.inline-card-arrow{
+  flex:0 0 auto;
+  color:var(--industry-accent);
+  font-size:18px;
+  line-height:1;
+}
+.inline-card-icon{
+  flex:0 0 38px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(217,255,56,.28);
+  border-radius:7px;
+  color:var(--industry-accent);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+
+/* Remove old bulky cards from visual flow */
+.article-file-card,
+.article-link-card{
+  display:none !important;
+}
+
+/* Social embeds should feel like media, not huge widgets */
+.social-wrap{
+  margin:28px auto;
+}
+.social-frame-shell{
+  border-radius:11px;
+  border-color:rgba(255,255,255,.10);
+}
+.article-inline-link{
+  margin-top:7px;
+  font-size:10px;
+  opacity:.8;
+}
+
+/* Cleaner divider */
+.article-divider{
+  max-width:620px;
+  margin:34px auto;
+}
+.article-divider::before,
+.article-divider::after{
+  background:rgba(255,255,255,.09);
+}
+.article-divider span{
+  width:4px;
+  height:4px;
+  opacity:.85;
+}
+
+@media(max-width:680px){
+  .article-inline-card{
+    margin:14px 0;
+    padding:12px 13px;
+  }
+  .inline-card-main strong{
+    font-size:13px;
+  }
+}
