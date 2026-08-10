@@ -1,0 +1,89 @@
+REMS-44 CLEANED
+
+Залишено лише зображення, які прямо використовуються кодом сайту.
+
+ЗАЛИШЕНО:
+images/hero-bg.png
+images/hero-director.png
+images/Власенко Даша.jpeg
+images/Вінцюк Андрій.jpeg
+images/Гострик Катя.jpeg
+images/Давидова Світлана.jpeg
+images/Жолуденко Поліна.jpeg
+images/Касєєв Данило.jpeg
+images/Колишкін Андрій.jpeg
+images/Кошелєва Мирослава.jpeg
+images/Максімова Саміра.jpeg
+images/Міленіна Марія.jpeg
+images/Олейников Даніїл.jpeg
+images/Позняк Артур.jpeg
+images/Ташута Артем.jpeg
+images/Чиньонова Даша.jpeg
+
+ВИДАЛЕНО:
+hero-director.png
+images/321
+images/IMG_8967.PNG
+images/IMG_9364.PNG
+images/hero-director.png.
+images/photo_2025-12-25_00-13-57.jpg
+images/student-1.svg
+images/student-3.svg
+images/Євсюкова Аліса.jpg
+images/Іващенко Каріна.jpg
+images/Іліка Дарина.jpg
+images/Амельченко Ірина.jpg
+images/Баланик Діана.jpg
+images/Безсмертна Поліна.jpg
+images/Белякіна Крістіна.jpg
+images/Верезуб Аліна.jpg
+images/Волошин Русанна.jpg
+images/Волощук Марія.jpg
+images/Війтенко Юлія.png
+images/Вінцюк Андрій – копія.jpeg
+images/Гаянська Катерина.jpg
+images/Гнідкова Ярослава.jpg
+images/Головач Валерія.jpg
+images/Голоднюк Софія.jpg
+images/Горбачук Мирослава.jpg
+images/Горбунова Яніна.jpg
+images/Григорович Валерія.jpg
+images/Дубенська Наталія.jpg
+images/Заклевська Катерина.jpg
+images/Касєєв Данило – копія.jpeg
+images/Корнет Ілля.jpg
+images/Кочурова Софія.jpg
+images/Красовська Ірина.jpg
+images/Крупенко Анна.jpg
+images/Крючков Даніл.jpg
+images/Куценок Ірина.jpg
+images/Кущ Марія.jpg
+images/Кібальчук Каріна.jpg
+images/Лавриненко Уляна.jpg
+images/Лагунова Вероніка.jpg
+images/Леоненко Аліна.jpg
+images/Лобова Поліна.png
+images/Ляльчук Павло.png
+images/Маркович Світлана.jpg
+images/Медведчук Олександра.jpg
+images/Міщенко Вікторія.jpg
+images/Орехівська Софія.jpg
+images/Павленко Іванна.jpg
+images/Павлов Роман.jpg
+images/Патрушева Анастасія.jpg
+images/Пилипенко Єлизавета.jpg
+images/Присяжнюк Марія.jpg
+images/Романчук Денис.jpg
+images/Сахнік Софія.jpg
+images/Синіцина Олександра.jpg
+images/Собяніна Поліна.jpg
+images/Співак Вікторія.jpg
+images/Тарковська Ольга.png
+images/Ткаченко Дарія.jpg
+images/Уманцева Кіра.jpg
+images/Фабрицький Тимофій.jpg
+images/Федік Ганна.jpg
+images/Цвик Кароліна.jpg
+images/Чижова Софія.jpg
+images/Шаповал Анна.jpg
+images/Шевченко Єлизавета.jpg
