@@ -1,136 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>РЕМС-44 — студентські портфоліо</title>
-
-  <meta
-    name="description"
-    content="Портфоліо студентів групи РЕМС-44 кафедри режисури естради і шоу КНУКіМ."
-  >
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="styles.css?v=15">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111318">
+  <title>REMS Control</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div><strong>REMS Control</strong><span>Пульт зайнятості</span></div>
+    </div>
+    <nav>
+      <button class="nav active" data-view="dashboard">⌂ <span>Головна</span></button>
+      <button class="nav" data-view="students">👥 <span>Студенти</span></button>
+      <button class="nav" data-view="projects">🎭 <span>Проєкти</span></button>
+      <button class="nav" data-view="calendar">📅 <span>Календар</span></button>
+      <button class="nav" data-view="schedule">🧭 <span>Розклад</span></button>
+      <button class="nav" data-view="industry">✦ <span>Зустріч із індустрією</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="mini" id="backupBtn">Експорт</button>
+      <label class="mini file-btn">Імпорт<input id="restoreInput" type="file" accept=".json"></label>
+      <div class="sidebar-note" id="cloudStatus">v0.3 · підключення…</div>
+    </div>
+  </aside>
 
+  <main>
+    <header class="topbar">
+      <div><h1 id="pageTitle">Головна</h1><p id="pageSubtitle">Навчальний рік 2026/27 · вересень–травень</p></div>
+      <button class="primary" id="quickAdd">+ Новий проєкт</button>
+    </header>
+    <section id="app"></section>
+  </main>
 
-<header class="hero hero-v403">
-  <div class="hero-content hero-content-v403 hero-content-v404">
-    <div class="hero-copy-v403">
-      <div class="hero-institution">
-        <div>КИЇВСЬКИЙ НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ КУЛЬТУРИ І МИСТЕЦТВ</div>
-        <div>КАФЕДРА РЕЖИСУРИ ЕСТРАДИ І ШОУ</div>
+  <dialog id="projectDialog">
+    <form method="dialog" id="projectForm">
+      <h2>Новий проєкт</h2>
+      <label>Назва<input id="projectName" required placeholder="Наприклад: Людина року"></label>
+      <div class="split">
+        <label>Колір<input id="projectColor" type="color" value="#2563EB"></label>
+        <label>Позначка<input id="projectEmoji" maxlength="3" value="◆"></label>
       </div>
+      <div class="dialog-actions"><button value="cancel" class="ghost">Скасувати</button><button class="primary" id="saveProject">Зберегти</button></div>
+    </form>
+  </dialog>
 
-      <h1>РЕМС-44</h1>
+  <dialog id="eventDialog">
+    <form method="dialog" id="eventForm">
+      <h2>Додати дату</h2>
+      <input type="hidden" id="eventProjectId">
+      <label>Дата<input id="eventDate" type="date" required></label>
+      <label>Тип<input id="eventType" required placeholder="Репетиція / зйомка / подія"></label>
+      <div class="dialog-actions"><button value="cancel" class="ghost">Скасувати</button><button class="primary" id="saveEvent">Додати</button></div>
+    </form>
+  </dialog>
 
-      <p class="hero-space-title">Простір майбутніх режисерів</p>
+  <dialog id="studentDialog" class="student-dialog">
+    <div id="studentDialogBody"></div>
+  </dialog>
 
-      <p class="hero-description">
-        Майбутні режисери концертів, шоу, сценічних номерів, перформансів і культурно-мистецьких подій.
-      </p>
-    </div>
-
-    <div class="hero-sections-v403 hero-sections-v404">
-      <a class="hero-section-card hero-section-students" href="#students">
-        <span class="hero-section-number">01</span>
-        <div>
-          <h2>Студенти</h2>
-          <p>Профілі, портфоліо, досвід і творчий шлях.</p>
-        </div>
-        <span class="hero-section-arrow">→</span>
-      </a>
-
-      
-
-      <a class="hero-section-card hero-section-projects" href="projects.html">
-        <span class="hero-section-number">02</span>
-        <div>
-          <h2>Ми на проєктах</h2>
-          <p>Концерти, телепроєкти, зйомки та події.</p>
-        </div>
-        <span class="hero-section-arrow">→</span>
-      </a>
-
-      <a class="hero-section-card hero-section-industry" href="industry.html">
-        <span class="hero-section-number">03</span>
-        <div>
-          <h2>Зустріч із індустрією</h2>
-          <p>Серія майстер-класів та гостьових лекцій із професіоналами індустрії.</p>
-        </div>
-        <span class="hero-section-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</header>
-
-
-<main>
-
-  <section
-    class="students-section"
-    id="students"
-  >
-
-    <div class="section-heading">
-
-      <div>
-
-        <p class="section-label">
-          Портфоліо
-        </p>
-
-        <h2>
-          Студенти РЕМС-44
-        </h2>
-
-      </div>
-
-      <p
-        class="student-count"
-        id="studentCount"
-      ></p>
-
-    </div>
-
-    <div
-      class="student-grid"
-      id="studentGrid"
-    ></div>
-
-  </section>
-
-</main>
-
-<footer>
-
-  <p>
-    РЕМС-44 · КНУКіМ
-  </p>
-
-  <p>
-    Студентські портфоліо · 2026
-  </p>
-
-</footer>
-
-<script src="students.js"></script>
-<script type="module" src="index.js?v=9"></script>
-
+  <script>window.REMS_SEED = {"students": [{"id": 1, "name": "Баленко Ілля Вікторович", "group": "РЕМС-44"}, {"id": 2, "name": "Вінцюк Андрій Олександрович", "group": "РЕМС-44"}, {"id": 3, "name": "Власенко Дар`я Андріївна", "group": "РЕМС-44"}, {"id": 4, "name": "Вознюк Олександра Миколаївна", "group": "РЕМС-44"}, {"id": 5, "name": "Волошина Дар'я Олександрівна", "group": "РЕМС-44"}, {"id": 6, "name": "Гострик Катерина Юріївна", "group": "РЕМС-44"}, {"id": 7, "name": "Давидова Світлана Олександрівна", "group": "РЕМС-44"}, {"id": 8, "name": "Данільчук Катерина Павлівна", "group": "РЕМС-44"}, {"id": 9, "name": "Дубина Віолетта Володимирівна", "group": "РЕМС-44"}, {"id": 10, "name": "Жолуденко Поліна Ігорівна", "group": "РЕМС-44"}, {"id": 11, "name": "Заярна Валерія Сергіївна", "group": "РЕМС-44"}, {"id": 12, "name": "Карпенко Рімма Романівна", "group": "РЕМС-44"}, {"id": 13, "name": "Касєєв Данило Павлович", "group": "РЕМС-44"}, {"id": 14, "name": "Кириленко Михайло Володимирович", "group": "РЕМС-44"}, {"id": 15, "name": "Колишкін Андрій Юрійович", "group": "РЕМС-44"}, {"id": 16, "name": "Коткова Анастасія Андріївна", "group": "РЕМС-44"}, {"id": 17, "name": "Кохан Ольга Сергіївна", "group": "РЕМС-44"}, {"id": 18, "name": "Кошелєва Мирослава Сергіївна", "group": "РЕМС-44"}, {"id": 19, "name": "Краснянський Ростислав Віталійович", "group": "РЕМС-44"}, {"id": 20, "name": "Кропивка Маргарита Анатоліївна", "group": "РЕМС-44"}, {"id": 21, "name": "Лещинський Денис Віталійович", "group": "РЕМС-44"}, {"id": 22, "name": "Максімова Саміра Вадимівна", "group": "РЕМС-44"}, {"id": 23, "name": "Міленіна Марія Олегівна", "group": "РЕМС-44"}, {"id": 24, "name": "Мойсієнко Віталіна Денисівна", "group": "РЕМС-44"}, {"id": 25, "name": "Мороз Марія Геннадіївна", "group": "РЕМС-44"}, {"id": 26, "name": "Мостова Яна Олегівна", "group": "РЕМС-44"}, {"id": 27, "name": "Неня Анастасія Миколаївна", "group": "РЕМС-44"}, {"id": 28, "name": "Олейников Данііл Денисович", "group": "РЕМС-44"}, {"id": 29, "name": "Павлова Катерина Володимирівна", "group": "РЕМС-44"}, {"id": 30, "name": "Піддубна Марія Анатоліївна", "group": "РЕМС-44"}, {"id": 31, "name": "Позняк Артур Русланович", "group": "РЕМС-44"}, {"id": 32, "name": "Рожанківська Іванна Орестівна", "group": "РЕМС-44"}, {"id": 33, "name": "Ташута Артем Анатолійович", "group": "РЕМС-44"}, {"id": 34, "name": "Чиньонова Дар`я Олексіївна", "group": "РЕМС-44"}], "projects": [{"id": "voice", "name": "Голос країни", "color": "#7C3AED", "emoji": "🎤"}, {"id": "jesc", "name": "Дитяче Євробачення", "color": "#F59E0B", "emoji": "⭐"}, {"id": "factory", "name": "Фабрика зірок", "color": "#EC4899", "emoji": "⭐"}, {"id": "dance", "name": "Танцюють всі", "color": "#10B981", "emoji": "💃"}], "events": [{"projectId": "factory", "date": "2026-08-04", "type": "Зйомка кастингу"}, {"projectId": "factory", "date": "2026-08-05", "type": "Зйомка кастингу"}, {"projectId": "factory", "date": "2026-08-06", "type": "Зйомка кастингу"}, {"projectId": "factory", "date": "2026-09-16", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-09-17", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-09-23", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-09-24", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-09-30", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-10-01", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-10-07", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-10-08", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-10-14", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-10-15", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-10-21", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-10-22", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-10-28", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-10-29", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-11-04", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-11-05", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-11-11", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-11-12", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-11-18", "type": "Репетиція"}, {"projectId": "factory", "date": "2026-11-19", "type": "Зйомка"}, {"projectId": "factory", "date": "2026-11-28", "type": "Генеральний прогін"}, {"projectId": "factory", "date": "2026-11-29", "type": "Гала-концерт"}, {"projectId": "dance", "date": "2026-09-07", "type": "Зйомка кастингу"}, {"projectId": "dance", "date": "2026-09-08", "type": "Зйомка кастингу"}, {"projectId": "dance", "date": "2026-09-09", "type": "Зйомка кастингу"}, {"projectId": "dance", "date": "2026-09-10", "type": "Зйомка кастингу"}, {"projectId": "dance", "date": "2026-09-11", "type": "Зйомка кастингу"}, {"projectId": "dance", "date": "2026-12-14", "type": "Зйомка буткемпа"}, {"projectId": "dance", "date": "2026-12-15", "type": "Зйомка буткемпа"}, {"projectId": "dance", "date": "2026-12-16", "type": "Зйомка буткемпа"}], "assignments": [{"studentId": 27, "projectId": "factory"}, {"studentId": 10, "projectId": "factory"}, {"studentId": 34, "projectId": "dance"}, {"studentId": 13, "projectId": "jesc"}, {"studentId": 23, "projectId": "jesc"}, {"studentId": 34, "projectId": "jesc"}], "settings": {"semesterStart": "2026-09-01", "semesterEnd": "2027-02-28"}};</script>
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js?v=4.1.2"></script>
 </body>
 </html>
