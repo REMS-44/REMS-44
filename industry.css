@@ -902,3 +902,66 @@ p.article-lead{
     text-indent:1.5em;
   }
 }
+
+
+/* =========================================================
+   REMS-44 v6.7 — ALIGN TEXT WITH PHOTOS
+   Текстова колонка тепер стоїть точно по центру відносно фото.
+   ========================================================= */
+
+/* Широкі фото/медіа — центр композиції */
+.article-cover-wrap,
+.article-wide,
+.article-two,
+.article-photo-block,
+.youtube-wrap{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Вузька текстова колонка — теж центрована всередині article-body */
+.article-text,
+.article-heading,
+.article-quote,
+.article-lead,
+.audio-wrap,
+.article-inline-card,
+.guest-card,
+.article-divider{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Основний текст: ширина лишається 680px, але більше не прилипає до лівого краю */
+.article-text,
+.article-body > .article-text:first-child{
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Вступ під головним фото також по центру тієї самої текстової осі */
+.article-lead{
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Підзаголовки та цитати мають ту саму вісь, що й текст */
+.article-heading,
+.article-quote{
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* На вузьких екранах усе займає доступну ширину */
+@media(max-width:700px){
+  .article-text,
+  .article-body > .article-text:first-child,
+  .article-lead,
+  .article-heading,
+  .article-quote{
+    max-width:100%;
+  }
+}
