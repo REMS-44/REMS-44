@@ -965,3 +965,77 @@ p.article-lead{
     max-width:100%;
   }
 }
+
+
+/* =========================================================
+   REMS-44 v6.8 — TEXT SAME WIDTH AS PHOTOS
+   Текстова колонка має ту саму ширину, що й фото.
+   Зберігаємо justify + абзацний відступ.
+   ========================================================= */
+
+.article-text,
+.article-body > .article-text:first-child,
+.article-lead,
+.article-heading,
+.article-quote{
+  max-width:820px !important;
+  width:100%;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Звичайний текст рівний по обох краях */
+.article-text,
+.article-body > .article-text:first-child,
+.article-lead{
+  text-align:justify;
+  text-justify:inter-word;
+  hyphens:auto;
+  -webkit-hyphens:auto;
+  overflow-wrap:break-word;
+}
+
+/* Абзацний відступ */
+.article-text p{
+  text-indent:2em;
+  text-align:justify;
+  text-align-last:left;
+}
+
+/* Заголовки не розтягуємо по ширині */
+.article-heading,
+.article-hero > h2{
+  text-align:left;
+  text-indent:0;
+}
+
+/* Фото та медіа — та сама ширина 820px */
+.article-cover-wrap,
+.article-wide,
+.article-two,
+.article-photo-block,
+.youtube-wrap{
+  max-width:820px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+@media(max-width:700px){
+  .article-text,
+  .article-body > .article-text:first-child,
+  .article-lead,
+  .article-heading,
+  .article-quote,
+  .article-cover-wrap,
+  .article-wide,
+  .article-two,
+  .article-photo-block,
+  .youtube-wrap{
+    max-width:100% !important;
+  }
+
+  .article-text p{
+    text-indent:1.5em;
+  }
+}
