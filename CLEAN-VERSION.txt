@@ -1,0 +1,17 @@
+REMS-44 CLEAN
+
+Додано папку logos з REMS Control:
+- fabryka-zirok.png
+- tantsiuiut-vsi.png
+- holos-krainy.png
+- junior-eurovision.png
+
+Це потрібно, щоб старі проєкти показували свої логотипи на персональних сторінках студентів.
+
+Прибрано лише очевидні невикористовувані дублікати/службові файли:
+- styles_fixed.css
+- portfolio-v38.css
+- script.js
+- старі службові txt-звіти
+
+Поточні робочі my.html / my.js / my.css збережено.
