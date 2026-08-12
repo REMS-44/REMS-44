@@ -1,0 +1,14 @@
+REMS-44 v5.2 — iPhone personal Home Screen fix
+
+Що змінено:
+- my.html більше не використовує manifest start_url.
+- iPhone при «На початковий екран» має зберегти саме поточну адресу my.html?key=...
+- додано iOS standalone meta tags.
+- service worker cache піднято до v5.2.
+
+Після завантаження на GitHub:
+1. Видалити стару іконку REMS-44 з iPhone.
+2. В Safari відкрити конкретну персональну сторінку студента.
+3. Поділитися → На початковий екран → Додати.
+4. Закрити Safari.
+5. Запустити нову іконку.
