@@ -1,1 +1,10 @@
-const C="rems44-v5.2.2",A=["./","./my.html","./my.css","./my.js","./manifest.webmanifest"];self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(A)).catch(()=>{})));self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x))))));self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(fetch(e.request).then(r=>{let q=r.clone();caches.open(C).then(c=>c.put(e.request,q)).catch(()=>{});return r}).catch(()=>caches.match(e.request)))});
+const C="rems44-v5.3",A=["./","./my.html","./my.css","./my.js","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png"];
+self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(A)).catch(()=>{})));
+self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x))))));
+self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(fetch(e.request).then(r=>{let q=r.clone();caches.open(C).then(c=>c.put(e.request,q)).catch(()=>{});return r}).catch(()=>caches.match(e.request)))});
+importScripts("https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging-compat.js");
+firebase.initializeApp({apiKey:"AIzaSyDKpQYuykXwfmkBxNBUhw317Yg72gZNPic",authDomain:"rems-control.firebaseapp.com",projectId:"rems-control",storageBucket:"rems-control.firebasestorage.app",messagingSenderId:"478170069073",appId:"1:478170069073:web:b4f9df1eb34754bdba2070"});
+const messaging=firebase.messaging();
+messaging.onBackgroundMessage(payload=>{const n=payload.notification||{};const d=payload.data||{};self.registration.showNotification(n.title||"REMS-44",{body:n.body||d.body||"Є зміни у твоєму розкладі.",icon:"./icons/icon-192.png",badge:"./icons/icon-96.png",data:{url:d.url||"./my.html"}})});
+self.addEventListener("notificationclick",e=>{e.notification.close();const url=e.notification.data?.url||"./my.html";e.waitUntil(clients.matchAll({type:"window",includeUncontrolled:true}).then(list=>{for(const c of list){if("focus" in c)return c.focus()}return clients.openWindow?clients.openWindow(url):null}))});

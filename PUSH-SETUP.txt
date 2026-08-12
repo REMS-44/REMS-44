@@ -1,0 +1,23 @@
+REMS-44 v5.3 — PUSH
+
+Додано:
+- PWA icons / Apple Touch Icon з фірмовим REMS-44
+- кнопка «Увімкнути сповіщення» на персональній сторінці
+- Firebase Cloud Messaging token registration
+- background push через service worker
+
+ВАЖЛИВО: для запису токенів у Firestore треба дозволити колекцію rems_push_subscriptions у Rules.
+Додайте всередині match /databases/{database}/documents { ... }:
+
+match /rems_push_subscriptions/{subscriptionId} {
+  allow read: if request.auth != null;
+  allow create, update: if request.resource.data.keys().hasOnly(["scheduleKey","studentName","group","token","enabled","userAgent","updatedAt"])
+    && request.resource.data.scheduleKey is string
+    && request.resource.data.studentName is string
+    && request.resource.data.token is string
+    && request.resource.data.enabled is bool;
+  allow delete: if false;
+}
+
+Після публікації правил відкрийте персональну сторінку і натисніть «Увімкнути».
+Для iPhone web push працює для вебзастосунку, доданого на Початковий екран.
