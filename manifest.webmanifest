@@ -1,0 +1,10 @@
+{
+  "name": "REMS-44 — Мій простір",
+  "short_name": "REMS-44",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07090d",
+  "theme_color": "#07090d",
+  "description": "Персональний простір студента REMS-44"
+}

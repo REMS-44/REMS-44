@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getFirestore, doc, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import { REMS_FIREBASE_CONFIG } from "./firebase-config.js";
 
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp(REMS_FIREBASE_CONFIG);
@@ -14,6 +14,10 @@ const WEEKDAYS = ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"];
 let currentMonth = null;
 let selectedDate = null;
 let activeProject = null;
+let acknowledgements={},scheduleData=null,ackUnsubs=[];
+const ackId=x=>`${key}__${x.__id}`;
+function startAckWatch(items){ackUnsubs.forEach(f=>f());ackUnsubs=[];acknowledgements={};items.forEach(x=>ackUnsubs.push(onSnapshot(doc(db,"rems_student_acknowledgements",ackId(x)),s=>{if(s.exists())acknowledgements[x.__id]=s.data();else delete acknowledgements[x.__id];if(scheduleData)render(scheduleData,false)})))}
+async function toggleAck(x){const ref=doc(db,"rems_student_acknowledgements",ackId(x));if(acknowledgements[x.__id])return deleteDoc(ref);return setDoc(ref,{scheduleKey:key,eventId:String(x.__id),projectId:String(x.projectId||""),projectName:String(x.projectName||"Проєкт"),date:String(x.date||""),type:String(x.type||""),studentName:String(scheduleData?.name||""),acknowledgedAt:new Date().toISOString()})}
 
 const isoDate = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 const todayISO = () => isoDate();
@@ -164,7 +168,7 @@ function dayDetails(data,items){
     <div class="day-details-head"><div class="section-kicker">Обраний день</div><h3>${esc(fullDate(selectedDate))}</h3></div>
     ${dayItems.length?`<div class="day-detail-list">${dayItems.map(x=>{const p=projectInfo(data,x);return `<article class="day-detail-card" style="--pc:${esc(p.color)}">
       ${logoHtml(p,"day-detail-logo")}
-      <div><div class="day-detail-project">${esc(p.name)}</div><h4>${esc(x.type||"Подія")}</h4><p>${[timeText(x),x.location].filter(Boolean).map(esc).join(" · ")}</p>${x.note?`<small>${esc(x.note)}</small>`:""}</div>
+      <div><div class="day-detail-project">${esc(p.name)}</div><h4>${esc(x.type||"Подія")}</h4><p>${[timeText(x),x.location].filter(Boolean).map(esc).join(" · ")}</p>${x.note?`<small>${esc(x.note)}</small>`:""}<button class="ack-btn ${acknowledgements[x.__id]?"done":""}" data-ack="${esc(x.__id)}">${acknowledgements[x.__id]?"✓ Ознайомлено":"✓ Ознайомився"}</button></div>
     </article>`}).join("")}</div>`:`<div class="empty-day">У цей день подій немає.</div>`}
   </div>`;
 }
@@ -200,17 +204,20 @@ function bind(data,items){
     const projectItems=items.filter(x=>{const p=projectInfo(data,x);return (p.id||p.name)===activeProject;});
     const future=projectItems.find(x=>x.date>=todayISO())||projectItems[0];
     if(future){currentMonth=monthKey(future.date);selectedDate=future.date;}
-    render(data);
+    render(data,false);
   });
-  document.querySelector("#clearProject")?.addEventListener("click",()=>{activeProject=null;selectedDate=null;render(data)});
-  document.querySelector("#prevMonth")?.addEventListener("click",()=>{currentMonth=shiftMonth(currentMonth,-1);selectedDate=null;render(data)});
-  document.querySelector("#nextMonth")?.addEventListener("click",()=>{currentMonth=shiftMonth(currentMonth,1);selectedDate=null;render(data)});
-  document.querySelectorAll(".cal-day[data-date]").forEach(btn=>btn.onclick=()=>{selectedDate=btn.dataset.date;render(data)});
+  document.querySelector("#clearProject")?.addEventListener("click",()=>{activeProject=null;selectedDate=null;render(data,false)});
+  document.querySelector("#prevMonth")?.addEventListener("click",()=>{currentMonth=shiftMonth(currentMonth,-1);selectedDate=null;render(data,false)});
+  document.querySelector("#nextMonth")?.addEventListener("click",()=>{currentMonth=shiftMonth(currentMonth,1);selectedDate=null;render(data,false)});
+  document.querySelectorAll(".cal-day[data-date]").forEach(btn=>btn.onclick=()=>{selectedDate=btn.dataset.date;render(data,false)});
+  document.querySelectorAll("[data-ack]").forEach(btn=>btn.onclick=async()=>{const x=items.find(i=>i.__id===btn.dataset.ack);if(!x)return;btn.disabled=true;try{await toggleAck(x)}catch(err){console.error(err);alert("Не вдалося зберегти підтвердження.")}finally{btn.disabled=false}});
 }
 
-function render(data){
+function render(data,restartAck=true){
+  scheduleData=data;
   document.title=`${data.name||"Мій простір"} — REMS-44`;
   const items=sortItems(data);
+  if(restartAck) startAckWatch(items);
   const next=nearest(items);
   if(!currentMonth) currentMonth=monthKey(next?.date||items.at(-1)?.date||todayISO());
   root.innerHTML=`<section class="profile-head"><div class="eyebrow">Персональний простір · ${esc(data.group||"REMS-44")}</div><h1>${esc(data.name||"Студент")}</h1><div class="updated"><i></i>${esc(updatedText(data.updatedAt))}</div></section>${nearestBlock(data,next)}${projectsBlock(data,items)}${compactCalendar(data,items)}<footer><span>REMS-44</span><span>Персональний простір студента</span></footer>`;
@@ -225,3 +232,5 @@ if(!key){
     render(snap.data()||{});
   },err=>{console.error(err);root.innerHTML='<div class="error"><b>Не вдалося завантажити дані.</b><p>Перевір інтернет-з’єднання та спробуй ще раз.</p></div>';});
 }
+
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));}
