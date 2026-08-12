@@ -568,6 +568,78 @@ const setWriteUiReady=(ready)=>{
   }
 };
 
+
+// v4.2 personal schedule sync: keeps existing private links and refreshes calendar data.
+async function syncExistingPersonalSchedules(){
+  if(!cloudReady || !cloudDb || !currentUser) return;
+  try{
+    const snap=await getDocs(collection(cloudDb,"rems_student_schedules"));
+    if(snap.empty) return;
+
+    const docs=snap.docs.map(d=>({id:d.id,data:d.data()||{}}));
+    const norm=v=>String(v||"").toLowerCase().replace(/[’'`]/g,"").replace(/\s+/g," ").trim();
+
+    for(const s of (db.students||[])){
+      const target=docs.find(d=>
+        (d.data.studentId && String(d.data.studentId)===String(s.id)) ||
+        (d.data.name && norm(d.data.name)===norm(s.name))
+      );
+      if(!target) continue; // Never change/create a student's private link here.
+
+      const studentEvents=(db.events||[])
+        .filter(e=>e?.date && studentsForEvent(e).some(st=>String(st.id)===String(s.id)))
+        .sort((a,b)=>`${a.date} ${a.startTime||""}`.localeCompare(`${b.date} ${b.startTime||""}`));
+
+      const projectIds=[...new Set(studentEvents.map(e=>String(e.projectId)))];
+      const projects={};
+      let embeddedLogoBytes=0;
+
+      for(const pid of projectIds){
+        const p=pBy(pid);
+        if(!p) continue;
+        let logo=projectLogoFile(p)||"";
+        // Avoid approaching Firestore's 1 MiB document limit when many custom data-URI logos exist.
+        if(logo.startsWith("data:")){
+          if(embeddedLogoBytes + logo.length > 650000) logo="";
+          else embeddedLogoBytes += logo.length;
+        }
+        projects[pid]={
+          name:String(p.name||""),
+          color:String(p.color||"#4b5563"),
+          logo:String(logo||"")
+        };
+      }
+
+      const items=studentEvents.map(e=>{
+        const p=pBy(e.projectId);
+        return {
+          projectId:String(e.projectId||""),
+          projectName:String(p?.name||"Активність"),
+          projectColor:String(p?.color||"#d9ff38"),
+          date:String(e.date||""),
+          type:String(e.type||"Подія"),
+          startTime:String(e.startTime||""),
+          endTime:String(e.endTime||""),
+          location:String(e.location||""),
+          note:String(e.note||"")
+        };
+      });
+
+      await setDoc(doc(cloudDb,"rems_student_schedules",target.id),{
+        ...target.data,
+        studentId:String(s.id),
+        name:String(s.name||target.data.name||""),
+        group:String(s.group||target.data.group||"РЕМС-44"),
+        items,
+        projects,
+        updatedAt:new Date().toISOString()
+      },{merge:false});
+    }
+  }catch(err){
+    console.error("Personal schedule sync failed:",err);
+  }
+}
+
 const save=async()=>{
   cache();
   if(applyingRemote) return true;
@@ -585,7 +657,8 @@ const save=async()=>{
       {merge:false}
     );
     cache();
-    setStatus("v4.1.2 · хмара ✓");
+    await syncExistingPersonalSchedules();
+    setStatus("v4.2 · хмара ✓");
     // Every derived screen should reflect the edited cloud data.
     // A rendering error must not turn a successful Firestore write into a failed save.
     try{
