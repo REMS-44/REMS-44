@@ -5,7 +5,9 @@ import { REMS_FIREBASE_CONFIG } from "./firebase-config.js";
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp(REMS_FIREBASE_CONFIG);
 const db = getFirestore(firebaseApp);
 const root = document.getElementById("app");
-const key = new URLSearchParams(location.search).get("key") || "";
+const urlKey = new URLSearchParams(location.search).get("key") || "";
+if(urlKey) localStorage.setItem("rems44_student_key", urlKey);
+const key = urlKey || localStorage.getItem("rems44_student_key") || "";
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const MONTHS = ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"];
