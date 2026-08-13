@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07090d">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="manifest" href="manifest.webmanifest?v=6">
   <title>Мій простір — REMS-44</title>
   <link rel="stylesheet" href="my.css?v=5">
 </head>
@@ -14,6 +16,54 @@
     <span>Мій простір</span>
   </header>
   <main id="app"><div class="loading">Завантаження…</div></main>
-  <script type="module" src="my.js?v=5"></script>
+
+  <script>
+  (function(){
+    var COOKIE_NAME="rems44_schedule_key";
+    var params=new URLSearchParams(location.search);
+    var urlKey=(params.get("key")||"").trim();
+
+    function setKeyCookie(value){
+      if(!value) return;
+      var maxAge=60*60*24*365*5;
+      document.cookie=
+        COOKIE_NAME+"="+encodeURIComponent(value)+
+        "; Path=/REMS-44/; Max-Age="+maxAge+
+        "; SameSite=Lax; Secure";
+    }
+
+    function getKeyCookie(){
+      var prefix=COOKIE_NAME+"=";
+      var parts=document.cookie.split(";");
+      for(var i=0;i<parts.length;i++){
+        var part=parts[i].trim();
+        if(part.indexOf(prefix)===0){
+          try{return decodeURIComponent(part.slice(prefix.length));}
+          catch(e){return part.slice(prefix.length);}
+        }
+      }
+      return "";
+    }
+
+    if(urlKey){
+      setKeyCookie(urlKey);
+      try{localStorage.setItem("rems44_personal_schedule_key",urlKey);}catch(e){}
+      return;
+    }
+
+    var saved=getKeyCookie();
+    if(!saved){
+      try{saved=localStorage.getItem("rems44_personal_schedule_key")||"";}catch(e){}
+    }
+
+    if(saved){
+      params.set("key",saved);
+      var next=location.pathname+"?"+params.toString()+location.hash;
+      history.replaceState(null,"",next);
+    }
+  })();
+  </script>
+
+  <script type="module" src="my.js?v=6"></script>
 </body>
 </html>
