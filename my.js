@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getFirestore, doc, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getMessaging, getToken, deleteToken, isSupported as messagingSupported } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging.js";
 import { REMS_FIREBASE_CONFIG } from "./firebase-config.js";
 
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp(REMS_FIREBASE_CONFIG);
@@ -26,6 +27,45 @@ let selectedDate = null;
 let activeProject = null;
 let acknowledgements={},scheduleData=null,ackUnsubs=[];
 const ackId=x=>`${key}__${x.__id}`;
+const VAPID_KEY="BGccZqJACDY_84tpUOYarY3QDrHLYedwJNDUzPCG8iYfv3MY72jCdigNWEb2lmGj260kdDUBKoMo7LzoBFZKPMA";
+let pushState={supported:false,permission:("Notification" in window?Notification.permission:"unsupported"),token:""};
+const pushDocId=()=>`${key}__${localStorage.getItem("rems44_push_device_id")||(()=>{const id=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now());localStorage.setItem("rems44_push_device_id",id);return id})()}`;
+async function enablePush(){
+  try{
+    if(!(await messagingSupported())) throw new Error("Цей браузер не підтримує web push.");
+    if(!("serviceWorker" in navigator)) throw new Error("Service Worker недоступний.");
+    const permission=await Notification.requestPermission();
+    pushState.permission=permission;
+    if(permission!=="granted"){ render(scheduleData,false); return; }
+    const reg=await navigator.serviceWorker.register("./sw.js");
+    await navigator.serviceWorker.ready;
+    const messaging=getMessaging(firebaseApp);
+    const token=await getToken(messaging,{vapidKey:VAPID_KEY,serviceWorkerRegistration:reg});
+    if(!token) throw new Error("Не вдалося отримати токен сповіщень.");
+    pushState={supported:true,permission,token};
+    localStorage.setItem("rems44_fcm_token",token);
+    await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{
+      scheduleKey:key,studentName:String(scheduleData?.name||""),group:String(scheduleData?.group||"REMS-44"),token,
+      enabled:true,userAgent:navigator.userAgent,updatedAt:new Date().toISOString()
+    },{merge:true});
+    render(scheduleData,false);
+  }catch(err){ console.error(err); alert(`Не вдалося увімкнути сповіщення. ${err?.message||""}`); }
+}
+async function disablePush(){
+  try{
+    const messaging=getMessaging(firebaseApp); await deleteToken(messaging).catch(()=>{});
+    await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{enabled:false,updatedAt:new Date().toISOString()},{merge:true}).catch(()=>{});
+    localStorage.removeItem("rems44_fcm_token"); pushState.token=""; render(scheduleData,false);
+  }catch(err){console.error(err)}
+}
+async function initPushState(){
+  try{pushState.supported=await messagingSupported();pushState.permission=("Notification" in window?Notification.permission:"unsupported");pushState.token=localStorage.getItem("rems44_fcm_token")||"";}catch{}
+}
+function pushCard(){
+  if(!pushState.supported) return `<section class="push-card"><div><b>🔔 Сповіщення</b><small>На цьому пристрої web push недоступний.</small></div></section>`;
+  const on=pushState.permission==="granted"&&!!pushState.token;
+  return `<section class="push-card ${on?"enabled":""}"><div><b>${on?"🔔 Сповіщення увімкнені":"🔔 Не пропусти зміни"}</b><small>${on?"REMS-44 може повідомляти про зміни у твоєму розкладі.":"Увімкни повідомлення про нові проєкти та зміни дати, часу або місця."}</small></div><button id="pushToggle">${on?"Вимкнути":"Увімкнути"}</button></section>`;
+}
 function startAckWatch(items){ackUnsubs.forEach(f=>f());ackUnsubs=[];acknowledgements={};items.forEach(x=>ackUnsubs.push(onSnapshot(doc(db,"rems_student_acknowledgements",ackId(x)),s=>{if(s.exists())acknowledgements[x.__id]=s.data();else delete acknowledgements[x.__id];if(scheduleData)render(scheduleData,false)})))}
 async function toggleAck(x){const ref=doc(db,"rems_student_acknowledgements",ackId(x));if(acknowledgements[x.__id])return deleteDoc(ref);return setDoc(ref,{scheduleKey:key,eventId:String(x.__id),projectId:String(x.projectId||""),projectName:String(x.projectName||"Проєкт"),date:String(x.date||""),type:String(x.type||""),studentName:String(scheduleData?.name||""),acknowledgedAt:new Date().toISOString()})}
 
@@ -209,6 +249,7 @@ function compactCalendar(data,items){
 }
 
 function bind(data,items){
+  document.querySelector("#pushToggle")?.addEventListener("click",()=>pushState.token?disablePush():enablePush());
   document.querySelectorAll(".project-card").forEach(btn=>btn.onclick=()=>{
     activeProject=btn.dataset.project||null;
     const projectItems=items.filter(x=>{const p=projectInfo(data,x);return (p.id||p.name)===activeProject;});
@@ -230,9 +271,11 @@ function render(data,restartAck=true){
   if(restartAck) startAckWatch(items);
   const next=nearest(items);
   if(!currentMonth) currentMonth=monthKey(next?.date||items.at(-1)?.date||todayISO());
-  root.innerHTML=`<section class="profile-head"><div class="eyebrow">Персональний простір · ${esc(data.group||"REMS-44")}</div><h1>${esc(data.name||"Студент")}</h1><div class="updated"><i></i>${esc(updatedText(data.updatedAt))}</div></section>${nearestBlock(data,next)}${projectsBlock(data,items)}${compactCalendar(data,items)}<footer><span>REMS-44</span><span>Персональний простір студента</span></footer>`;
+  root.innerHTML=`<section class="profile-head"><div class="eyebrow">Персональний простір · ${esc(data.group||"REMS-44")}</div><h1>${esc(data.name||"Студент")}</h1><div class="updated"><i></i>${esc(updatedText(data.updatedAt))}</div></section>${pushCard()}${nearestBlock(data,next)}${projectsBlock(data,items)}${compactCalendar(data,items)}<footer><span>REMS-44</span><span>Персональний простір студента</span></footer>`;
   bind(data,items);
 }
+
+initPushState().then(()=>{if(scheduleData)render(scheduleData,false)});
 
 if(!key){
   root.innerHTML='<div class="error"><b>Особисте посилання відсутнє.</b><p>Відкрий посилання, яке надіслав викладач.</p></div>';
