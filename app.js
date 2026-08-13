@@ -528,7 +528,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-functions.js";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
@@ -540,7 +539,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 const studentMediaCache=new Map();
 let db=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem(OLDKEY)||localStorage.getItem(OLDERKEY)||"null")||clone(window.REMS_SEED);
 let cloudDb=null, cloudReady=false, applyingRemote=false, cloudInitializing=false, cloudWriting=false;
-let firebaseApp=null, auth=null, currentUser=null, mediaStorage=null, functions=null;
+let firebaseApp=null, auth=null, currentUser=null, mediaStorage=null;
 const projectUiState={};
 let currentView="dashboard";
 const statusEl=()=>document.querySelector("#cloudStatus");
@@ -641,46 +640,6 @@ async function syncExistingPersonalSchedules(){
   }
 }
 
-const scheduleKeysForStudentIds=async(studentIds=[])=>{
-  if(!cloudDb) return [];
-
-  const ids=new Set(
-    (studentIds||[])
-      .map(id=>String(id))
-      .filter(Boolean)
-  );
-
-  if(!ids.size) return [];
-
-  const snap=await getDocs(
-    collection(cloudDb,"rems_student_schedules")
-  );
-
-  return snap.docs
-    .filter(docSnap=>{
-      const data=docSnap.data()||{};
-      return ids.has(String(data.studentId||""));
-    })
-    .map(docSnap=>docSnap.id);
-};
-const sendSchedulePush=async({scheduleKeys,title,body,url})=>{
-  if(!functions) throw new Error("Cloud Functions ще не ініціалізовано");
-  if(!currentUser) throw new Error("Потрібна авторизація");
-
-  const sendNotification=httpsCallable(
-    functions,
-    "sendScheduleNotification"
-  );
-
-  const result=await sendNotification({
-    scheduleKeys,
-    title,
-    body,
-    url
-  });
-
-  return result.data;
-};
 const save=async()=>{
   cache();
   if(applyingRemote) return true;
@@ -3840,7 +3799,6 @@ async function initCloud(){
   try{
     setStatus("v4.1.2 · завантаження хмари…");
     if(!firebaseApp) firebaseApp=initializeApp(cfg);
-functions=getFunctions(firebaseApp,"europe-west1");
     cloudDb=getFirestore(firebaseApp);
     mediaStorage=getStorage(firebaseApp);
     const ref=doc(cloudDb,"rems_control",CLOUD_DOC);
