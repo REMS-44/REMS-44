@@ -33,7 +33,7 @@ const mergeProfile=(base,remote)=>({
   id:base.id,
   studentId:String(base.studentId||remote?.studentId||""),
   name:base.name,
-  group:String(base.group||remote?.group||"").trim(),
+  group:String(remote?.group||base.group||"").trim(),
   photoData:String(remote?.photoData||"")
 });
 

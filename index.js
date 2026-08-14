@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js?v=8";
+import { getPublicStudents } from "./public-data.js?v=10";
 
 const studentGrid=document.getElementById("studentGrid");
 const studentCount=document.getElementById("studentCount");
