@@ -99,11 +99,9 @@ export async function getPublicStudents(fallbackStudents=[]){
       merged.push(x);
     });
 
-    return merged.sort((a,b)=>{
-      const ga=String(a.group||""),gb=String(b.group||"");
-      if(ga!==gb) return ga.localeCompare(gb,"uk");
-      return String(a.name||"").localeCompare(String(b.name||""),"uk");
-    });
+    return merged.sort((a,b)=>
+      String(a.name||"").localeCompare(String(b.name||""),"uk")
+    );
   }catch(err){
     console.warn("Public student data unavailable; static profiles are used.",err);
     return base;
