@@ -1,6 +1,6 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-import { getMessaging, getToken, deleteToken, isSupported as messagingSupported } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-messaging.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { getFirestore, doc, onSnapshot, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+import { getMessaging, register, unregister, onRegistered, onUnregistered, onMessage, isSupported as messagingSupported } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js";
 import { REMS_FIREBASE_CONFIG } from "./firebase-config.js";
 
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp(REMS_FIREBASE_CONFIG);
@@ -28,42 +28,174 @@ let activeProject = null;
 let acknowledgements={},scheduleData=null,ackUnsubs=[];
 const ackId=x=>`${key}__${x.__id}`;
 const VAPID_KEY="BGccZqJACDY_84tpUOYarY3QDrHLYedwJNDUzPCG8iYfv3MY72jCdigNWEb2lmGj260kdDUBKoMo7LzoBFZKPMA";
-let pushState={supported:false,permission:("Notification" in window?Notification.permission:"unsupported"),token:""};
+const FID_STORAGE="rems44_fcm_fid";
+const LEGACY_TOKEN_STORAGE="rems44_fcm_token";
+let pushState={supported:false,permission:("Notification" in window?Notification.permission:"unsupported"),id:""};
+let messagingInstance=null;
+let messagingListenersReady=false;
+let pendingRegistration=null;
 const pushDocId=()=>`${key}__${localStorage.getItem("rems44_push_device_id")||(()=>{const id=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now());localStorage.setItem("rems44_push_device_id",id);return id})()}`;
+
+async function savePushRegistration(fid){
+  const id=String(fid||"").trim();
+  if(!id) throw new Error("Firebase не повернув ідентифікатор встановлення.");
+  // Поле називається token для сумісності з поточною Cloud Function і Firestore Rules.
+  // Firebase Admin під час міграції приймає FID у полі token; сервер пізніше можна
+  // безболісно перевести на поле fid.
+  await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{
+    scheduleKey:key,
+    studentName:String(scheduleData?.name||""),
+    group:String(scheduleData?.group||"REMS-44"),
+    token:id,
+    enabled:true,
+    userAgent:navigator.userAgent,
+    updatedAt:new Date().toISOString()
+  },{merge:true});
+  localStorage.setItem(FID_STORAGE,id);
+  localStorage.removeItem(LEGACY_TOKEN_STORAGE);
+  pushState={supported:true,permission:"granted",id};
+  if(scheduleData) render(scheduleData,false);
+  return id;
+}
+
+async function markPushDisabled(){
+  await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{
+    enabled:false,
+    updatedAt:new Date().toISOString()
+  },{merge:true}).catch(()=>{});
+  localStorage.removeItem(FID_STORAGE);
+  localStorage.removeItem(LEGACY_TOKEN_STORAGE);
+  pushState.id="";
+  if(scheduleData) render(scheduleData,false);
+}
+
+function foregroundNotification(payload={}){
+  const n=payload.notification||{};
+  const d=payload.data||{};
+  const title=n.title||d.title||"REMS-44";
+  const body=n.body||d.body||"Є зміни у твоєму розкладі.";
+  const url=d.url||`./my.html${key?`?key=${encodeURIComponent(key)}`:""}`;
+  navigator.serviceWorker.ready.then(reg=>reg.showNotification(title,{
+    body,
+    icon:"./icons/icon-192.png",
+    badge:"./icons/icon-96.png",
+    data:{url},
+    tag:"rems44-schedule-update"
+  })).catch(console.error);
+}
+
+function ensureMessagingListeners(){
+  if(messagingListenersReady) return messagingInstance;
+  messagingInstance=getMessaging(firebaseApp);
+
+  onRegistered(messagingInstance,(fid)=>{
+    savePushRegistration(fid).then(id=>{
+      if(pendingRegistration){
+        clearTimeout(pendingRegistration.timer);
+        pendingRegistration.resolve(id);
+        pendingRegistration=null;
+      }
+    }).catch(err=>{
+      console.error("FCM FID save failed:",err);
+      if(pendingRegistration){
+        clearTimeout(pendingRegistration.timer);
+        pendingRegistration.reject(err);
+        pendingRegistration=null;
+      }
+    });
+  });
+
+  onUnregistered(messagingInstance,()=>{
+    markPushDisabled().catch(console.error);
+  });
+
+  onMessage(messagingInstance,(payload)=>{
+    console.log("REMS-44 foreground push:",payload);
+    foregroundNotification(payload);
+  });
+
+  messagingListenersReady=true;
+  return messagingInstance;
+}
+
+async function registerPushWithFirebase(reg){
+  const messaging=ensureMessagingListeners();
+  if(pendingRegistration){
+    clearTimeout(pendingRegistration.timer);
+    pendingRegistration.reject(new Error("Повторна реєстрація сповіщень."));
+    pendingRegistration=null;
+  }
+  const waitForFid=new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>{
+      if(pendingRegistration){
+        pendingRegistration=null;
+        reject(new Error("Firebase не повернув FID вчасно. Спробуй ще раз."));
+      }
+    },15000);
+    pendingRegistration={resolve,reject,timer};
+  });
+  try{
+    await register(messaging,{vapidKey:VAPID_KEY,serviceWorkerRegistration:reg});
+    return await waitForFid;
+  }catch(err){
+    if(pendingRegistration){clearTimeout(pendingRegistration.timer);pendingRegistration=null;}
+    throw err;
+  }
+}
+
 async function enablePush(){
   try{
     if(!(await messagingSupported())) throw new Error("Цей браузер не підтримує web push.");
     if(!("serviceWorker" in navigator)) throw new Error("Service Worker недоступний.");
     const permission=await Notification.requestPermission();
     pushState.permission=permission;
-    if(permission!=="granted"){ render(scheduleData,false); return; }
-    const reg=await navigator.serviceWorker.register("./sw.js");
+    if(permission!=="granted"){ if(scheduleData)render(scheduleData,false); return; }
+    const reg=await navigator.serviceWorker.register("./sw.js?v=9");
     await navigator.serviceWorker.ready;
-    const messaging=getMessaging(firebaseApp);
-    const token=await getToken(messaging,{vapidKey:VAPID_KEY,serviceWorkerRegistration:reg});
-    if(!token) throw new Error("Не вдалося отримати токен сповіщень.");
-    pushState={supported:true,permission,token};
-    localStorage.setItem("rems44_fcm_token",token);
-    await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{
-      scheduleKey:key,studentName:String(scheduleData?.name||""),group:String(scheduleData?.group||"REMS-44"),token,
-      enabled:true,userAgent:navigator.userAgent,updatedAt:new Date().toISOString()
-    },{merge:true});
-    render(scheduleData,false);
-  }catch(err){ console.error(err); alert(`Не вдалося увімкнути сповіщення. ${err?.message||""}`); }
+    await registerPushWithFirebase(reg);
+  }catch(err){
+    console.error(err);
+    alert(`Не вдалося увімкнути сповіщення. ${err?.message||""}`);
+  }
 }
+
 async function disablePush(){
   try{
-    const messaging=getMessaging(firebaseApp); await deleteToken(messaging).catch(()=>{});
-    await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{enabled:false,updatedAt:new Date().toISOString()},{merge:true}).catch(()=>{});
-    localStorage.removeItem("rems44_fcm_token"); pushState.token=""; render(scheduleData,false);
+    const messaging=ensureMessagingListeners();
+    await unregister(messaging).catch(()=>{});
+    await markPushDisabled();
   }catch(err){console.error(err)}
 }
-async function initPushState(){
-  try{pushState.supported=await messagingSupported();pushState.permission=("Notification" in window?Notification.permission:"unsupported");pushState.token=localStorage.getItem("rems44_fcm_token")||"";}catch{}
+
+async function refreshExistingPush(){
+  try{
+    if(pushState.permission!=="granted") return;
+    const hadFid=!!localStorage.getItem(FID_STORAGE);
+    const hadLegacyToken=!!localStorage.getItem(LEGACY_TOKEN_STORAGE);
+    if(!hadFid&&!hadLegacyToken) return; // Не вмикаємо push тим, хто раніше його не просив.
+    if(!(await messagingSupported())||!("serviceWorker" in navigator)) return;
+    const reg=await navigator.serviceWorker.register("./sw.js?v=9");
+    await navigator.serviceWorker.ready;
+    await registerPushWithFirebase(reg);
+  }catch(err){
+    // Міграція не повинна ламати сам персональний розклад.
+    console.error("Push refresh/migration failed:",err);
+  }
 }
+
+async function initPushState(){
+  try{
+    pushState.supported=await messagingSupported();
+    pushState.permission=("Notification" in window?Notification.permission:"unsupported");
+    pushState.id=localStorage.getItem(FID_STORAGE)||"";
+    if(pushState.supported) ensureMessagingListeners();
+    refreshExistingPush();
+  }catch(err){console.error("Push init failed:",err)}
+}
+
 function pushCard(){
   if(!pushState.supported) return `<section class="push-card"><div><b>🔔 Сповіщення</b><small>На цьому пристрої web push недоступний.</small></div></section>`;
-  const on=pushState.permission==="granted"&&!!pushState.token;
+  const on=pushState.permission==="granted"&&!!pushState.id;
   return `<section class="push-card ${on?"enabled":""}"><div><b>${on?"🔔 Сповіщення увімкнені":"🔔 Не пропусти зміни"}</b><small>${on?"REMS-44 може повідомляти про зміни у твоєму розкладі.":"Увімкни повідомлення про нові проєкти та зміни дати, часу або місця."}</small></div><button id="pushToggle">${on?"Вимкнути":"Увімкнути"}</button></section>`;
 }
 function startAckWatch(items){ackUnsubs.forEach(f=>f());ackUnsubs=[];acknowledgements={};items.forEach(x=>ackUnsubs.push(onSnapshot(doc(db,"rems_student_acknowledgements",ackId(x)),s=>{if(s.exists())acknowledgements[x.__id]=s.data();else delete acknowledgements[x.__id];if(scheduleData)render(scheduleData,false)})))}
@@ -249,7 +381,7 @@ function compactCalendar(data,items){
 }
 
 function bind(data,items){
-  document.querySelector("#pushToggle")?.addEventListener("click",()=>pushState.token?disablePush():enablePush());
+  document.querySelector("#pushToggle")?.addEventListener("click",()=>pushState.id?disablePush():enablePush());
   document.querySelectorAll(".project-card").forEach(btn=>btn.onclick=()=>{
     activeProject=btn.dataset.project||null;
     const projectItems=items.filter(x=>{const p=projectInfo(data,x);return (p.id||p.name)===activeProject;});
@@ -286,4 +418,4 @@ if(!key){
   },err=>{console.error(err);root.innerHTML='<div class="error"><b>Не вдалося завантажити дані.</b><p>Перевір інтернет-з’єднання та спробуй ще раз.</p></div>';});
 }
 
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js?v=9").catch(console.error));}

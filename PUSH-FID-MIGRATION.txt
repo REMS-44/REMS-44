@@ -1,0 +1,13 @@
+REMS-44 push migration — 14.08.2026
+
+Змінено лише push-систему персональної сторінки:
+- Firebase Web SDK 12.17.1 для my.js / sw.js
+- deprecated getToken() замінено на register() + onRegistered() (FID)
+- FID тимчасово зберігається у Firestore-полі token для сумісності з чинними Rules та Cloud Function
+- старий rems44_fcm_token автоматично мігрується при наступному відкритті сторінки
+- додано onMessage() і foreground notification через ServiceWorkerRegistration.showNotification()
+- service worker cache оновлено до v9-fid
+- notificationclick оголошено до імпорту FCM
+
+Cloud Function можна залишити як є на час міграції: Firebase Admin під час migration period приймає FID у полі token.
+Для остаточного переходу сервер потім варто змінити з message.token на message.fid.
