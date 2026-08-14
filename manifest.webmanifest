@@ -1,12 +1,12 @@
 {
-  "name": "REMS-44 — Мій простір",
-  "short_name": "REMS-44",
+  "name": "Майстерня режисури — Мій простір",
+  "short_name": "Майстерня",
   "start_url": "./my.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#07090d",
   "theme_color": "#07090d",
-  "description": "Персональний простір студента REMS-44",
+  "description": "Персональний простір студента кафедри режисури естради і шоу",
   "icons": [
     {
       "src": "icons/icon-96.png",

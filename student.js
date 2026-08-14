@@ -203,7 +203,7 @@ if(!student){
         <img class="large-profile-image" src="${esc(photo)}" alt="${esc(student.name)}">
       </aside>
       <main class="profile-text-column">
-        <div class="profile-kicker">РЕМС-44 · КНУКіМ</div>
+        <div class="profile-kicker">${esc(student.group||"Студенти")} · КНУКіМ</div>
         <h1 class="profile-name">${esc(student.name)}</h1>
         <div class="profile-speciality">${esc(student.role||"Режисер/ка естради і шоу")}</div>
 

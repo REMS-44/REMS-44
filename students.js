@@ -1,469 +1,682 @@
 window.REMS44_STUDENTS = [
   {
-    id: "vintsiuk-andrii",
-    name: "Вінцюк Андрій",
-    role: "Режисер естради і шоу",
-    photo: "images/Вінцюк Андрій.jpeg",
-
-    bio: [
-      "Андрій Вінцюк — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться режисурою концертів, музичних шоу, сценічних номерів і сучасних перформативних форматів."
-    ],
-
-    skills: [
-      "Режисура",
-      "Сценарна робота",
-      "Робота з виконавцями",
-      "Концертні програми"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "vintsiuk-andrii",
+    "name": "Вінцюк Андрій Олександрович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [
-      {
-        title: "Відеоробота",
-        youtube: "https://www.youtube.com/watch?v=58ZgRSbX6tU"
-      }
-    ],
-
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "vlasenko-dasha",
-    name: "Власенко Даша",
-    role: "Режисерка естради і шоу",
-    photo: "images/Власенко Даша.jpeg",
-
-    bio: [
-      "Даша Власенко — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Працює зі сценічними образами, музикою, пластикою, світлом і візуальним оформленням творчих проєктів."
-    ],
-
-    skills: [
-      "Режисура",
-      "Сценічний образ",
-      "Музична драматургія",
-      "Візуальна концепція"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "vlasenko-dasha",
+    "name": "Власенко Дар`я Андріївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "hostryk-katya",
-    name: "Гострик Катя",
-    role: "Режисерка естради і шоу",
-    photo: "images/Гострик Катя.jpeg",
-
-    bio: [
-      "Катя Гострик — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться створенням сценічних номерів, перформансів, концертних програм і культурно-мистецьких подій."
-    ],
-
-    skills: [
-      "Режисура",
-      "Перформанс",
-      "Сценаристика",
-      "Організація подій"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "hostryk-katya",
+    "name": "Гострик Катерина Юріївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "davydova-svitlana",
-    name: "Давидова Світлана",
-    role: "Режисерка естради і шоу",
-    photo: "images/Давидова Світлана.jpeg",
-
-    bio: [
-      "Світлана Давидова — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "У своїх роботах досліджує взаємодію виконавця, музики, сценічного простору та емоційного контакту з глядачем."
-    ],
-
-    skills: [
-      "Робота з виконавцями",
-      "Режисура номера",
-      "Сценічна композиція",
-      "Музичне шоу"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "zholudenko-polina",
+    "name": "Жолуденко Поліна Ігорівна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "zholudenko-polina",
-    name: "Жолуденко Поліна",
-    role: "Режисерка естради і шоу",
-    photo: "images/Жолуденко Поліна.jpeg",
-
-    bio: [
-      "Поліна Жолуденко — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться образною режисурою, сучасними музичними форматами, сценічною пластикою та візуальною драматургією."
-    ],
-
-    skills: [
-      "Образна режисура",
-      "Сценічна пластика",
-      "Музичні формати",
-      "Візуальна драматургія"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "control-11",
+    "name": "Заярна Валерія Сергіївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "kasieiev-danylo",
-    name: "Касєєв Данило",
-    role: "Режисер естради і шоу",
-    photo: "images/Касєєв Данило.jpeg",
-
-    bio: [
-      "Данило Касєєв — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Працює з концертними постановками, сценічною дією, музичним матеріалом і сучасними видовищними форматами."
-    ],
-
-    skills: [
-      "Концертна режисура",
-      "Сценаристика",
-      "Робота з музичним матеріалом",
-      "Постановка номерів"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "kasieiev-danylo",
+    "name": "Касєєв Данило Павлович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "kolyshkin-andrii",
-    name: "Колишкін Андрій",
-    role: "Режисер естради і шоу",
-    photo: "images/Колишкін Андрій.jpeg",
-
-    bio: [
-      "Андрій Колишкін — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться режисурою концертів, сценічних номерів, телевізійних форматів і великих культурно-мистецьких подій."
-    ],
-
-    skills: [
-      "Концертна режисура",
-      "Телеверсія шоу",
-      "Сценічна композиція",
-      "Організація подій"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "kolyshkin-andrii",
+    "name": "Колишкін Андрій Юрійович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "koshelieva-myroslava",
-    name: "Кошелєва Мирослава",
-    role: "Режисерка естради і шоу",
-    photo: "images/Кошелєва Мирослава.jpeg",
-
-    bio: [
-      "Мирослава Кошелєва — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "У центрі її творчих інтересів — атмосфера події, робота з виконавцем, музикою, світлом і сценічним простором."
-    ],
-
-    skills: [
-      "Робота з виконавцями",
-      "Сценічна атмосфера",
-      "Світлове рішення",
-      "Режисура подій"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "control-17",
+    "name": "Кохан Ольга Сергіївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "maksimova-samira",
-    name: "Максімова Саміра",
-    role: "Режисерка естради і шоу",
-    photo: "images/Максімова Саміра.jpeg",
-
-    bio: [
-      "Саміра Максімова — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться сценічною драматургією, сучасним перформансом, роботою з музикою та візуальними технологіями."
-    ],
-
-    skills: [
-      "Сценічна драматургія",
-      "Перформанс",
-      "Музичні проєкти",
-      "Візуальна концепція"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "koshelieva-myroslava",
+    "name": "Кошелєва Мирослава Сергіївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "milenina-mariia",
-    name: "Міленіна Марія",
-    role: "Режисерка естради і шоу",
-    photo: "images/Міленіна Марія.jpeg",
-
-    bio: [
-      "Марія Міленіна — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Працює з музичними номерами, сценічною композицією, образністю та емоційною побудовою видовища."
-    ],
-
-    skills: [
-      "Музичний номер",
-      "Композиція",
-      "Образне рішення",
-      "Робота з артистами"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "control-19",
+    "name": "Краснянський Ростислав Віталійович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "oleinykov-daniil",
-    name: "Олейников Даніїл",
-    role: "Режисер естради і шоу",
-    photo: "images/Олейников Даніїл.jpeg",
-
-    bio: [
-      "Даніїл Олейников — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться концертними постановками, сучасними шоу, сценічними технологіями та роботою з виконавцями."
-    ],
-
-    skills: [
-      "Режисура шоу",
-      "Сценічні технології",
-      "Концертна постановка",
-      "Робота з артистами"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "milenina-mariia",
+    "name": "Міленіна Марія Олегівна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "pozniak-artur",
-    name: "Позняк Артур",
-    role: "Режисер естради і шоу",
-    photo: "images/Позняк Артур.jpeg",
-
-    bio: [
-      "Артур Позняк — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Працює з музичними шоу, сценічними номерами, сценарною структурою та сучасними форматами видовищ."
-    ],
-
-    skills: [
-      "Музичне шоу",
-      "Сценарна структура",
-      "Постановка номерів",
-      "Режисура подій"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "control-24",
+    "name": "Мойсієнко Віталіна Денисівна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "tashuta-artem",
-    name: "Ташута Артем",
-    role: "Режисер естради і шоу",
-    photo: "images/Ташута Артем.jpeg",
-
-    bio: [
-      "Артем Ташута — студент спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "Цікавиться постановкою концертних програм, роботою з музикою, світлом, відео та сценічним простором."
-    ],
-
-    skills: [
-      "Концертна програма",
-      "Світло",
-      "Відеоконтент",
-      "Сценічний простір"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "control-27",
+    "name": "Неня Анастасія Миколаївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
   },
-
   {
-    id: "chynionova-dasha",
-    name: "Чиньонова Даша",
-    role: "Режисерка естради і шоу",
-    photo: "images/Чиньонова Даша.jpeg",
-
-    bio: [
-      "Даша Чиньонова — студентка спеціальності «Режисура естради і шоу» Київського національного університету культури і мистецтв.",
-      "У своїх роботах досліджує сценічний образ, музичну драматургію, атмосферу та сучасні візуальні рішення."
-    ],
-
-    skills: [
-      "Сценічний образ",
-      "Музична драматургія",
-      "Атмосфера події",
-      "Візуальні рішення"
-    ],
-
-    achievements: [],
-
-    socials: {
-      instagram: "",
-      tiktok: "",
-      youtube: "",
-      telegram: "",
-      facebook: "",
-      email: ""
+    "id": "oleinykov-daniil",
+    "name": "Олейников Данііл Денисович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
     },
-
-    videos: [],
-    gallery: []
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "pozniak-artur",
+    "name": "Позняк Артур Русланович",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-32",
+    "name": "Рожанківська Іванна Орестівна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "chynionova-dasha",
+    "name": "Чиньонова Дар`я Олексіївна",
+    "group": "РЕМС-44",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-1",
+    "name": "Баленко Ілля Вікторович",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-4",
+    "name": "Вознюк Олександра Миколаївна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-5",
+    "name": "Волошина Дар'я Олександрівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "davydova-svitlana",
+    "name": "Давидова Світлана Олександрівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-8",
+    "name": "Данільчук Катерина Павлівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-9",
+    "name": "Дубина Віолетта Володимирівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-12",
+    "name": "Карпенко Рімма Романівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-14",
+    "name": "Кириленко Михайло Володимирович",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-16",
+    "name": "Коткова Анастасія Андріївна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-20",
+    "name": "Кропивка Маргарита Анатоліївна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-21",
+    "name": "Лещинський Денис Віталійович",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "maksimova-samira",
+    "name": "Максімова Саміра Вадимівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-25",
+    "name": "Мороз Марія Геннадіївна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-26",
+    "name": "Мостова Яна Олегівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-29",
+    "name": "Павлова Катерина Володимирівна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "control-30",
+    "name": "Піддубна Марія Анатоліївна",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
+  },
+  {
+    "id": "tashuta-artem",
+    "name": "Ташута Артем Анатолійович",
+    "group": "РЕМС-34",
+    "role": "Режисура естради і шоу",
+    "photo": "",
+    "bio": [],
+    "skills": [],
+    "achievements": [],
+    "socials": {
+      "instagram": "",
+      "tiktok": "",
+      "youtube": "",
+      "telegram": "",
+      "facebook": "",
+      "email": ""
+    },
+    "videos": [],
+    "gallery": []
   }
 ];

@@ -45,7 +45,7 @@ async function enablePush(){
     pushState={supported:true,permission,token};
     localStorage.setItem("rems44_fcm_token",token);
     await setDoc(doc(db,"rems_push_subscriptions",pushDocId()),{
-      scheduleKey:key,studentName:String(scheduleData?.name||""),group:String(scheduleData?.group||"REMS-44"),token,
+      scheduleKey:key,studentName:String(scheduleData?.name||""),group:String(scheduleData?.group||"Майстерня режисури"),token,
       enabled:true,userAgent:navigator.userAgent,updatedAt:new Date().toISOString()
     },{merge:true});
     render(scheduleData,false);
@@ -271,7 +271,7 @@ function render(data,restartAck=true){
   if(restartAck) startAckWatch(items);
   const next=nearest(items);
   if(!currentMonth) currentMonth=monthKey(next?.date||items.at(-1)?.date||todayISO());
-  root.innerHTML=`<section class="profile-head"><div class="eyebrow">Персональний простір · ${esc(data.group||"REMS-44")}</div><h1>${esc(data.name||"Студент")}</h1><div class="updated"><i></i>${esc(updatedText(data.updatedAt))}</div></section>${pushCard()}${nearestBlock(data,next)}${projectsBlock(data,items)}${compactCalendar(data,items)}<footer><span>REMS-44</span><span>Персональний простір студента</span></footer>`;
+  root.innerHTML=`<section class="profile-head"><div class="eyebrow">Персональний простір · ${esc(data.group||"Майстерня режисури")}</div><h1>${esc(data.name||"Студент")}</h1><div class="updated"><i></i>${esc(updatedText(data.updatedAt))}</div></section>${pushCard()}${nearestBlock(data,next)}${projectsBlock(data,items)}${compactCalendar(data,items)}<footer><span>REMS-44</span><span>Персональний простір студента</span></footer>`;
   bind(data,items);
 }
 
