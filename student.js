@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js?v=4";
+import { getPublicStudents } from "./public-data.js?v=7";
 
 const profileContainer=document.getElementById("studentProfile");
 const params=new URLSearchParams(window.location.search);

@@ -1,6 +1,7 @@
 window.REMS44_STUDENTS = [
   {
     "id": "vintsiuk-andrii",
+    "studentId": "2",
     "name": "Вінцюк Андрій Олександрович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -21,6 +22,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "vlasenko-dasha",
+    "studentId": "3",
     "name": "Власенко Дар`я Андріївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -41,6 +43,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "hostryk-katya",
+    "studentId": "6",
     "name": "Гострик Катерина Юріївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -61,6 +64,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "zholudenko-polina",
+    "studentId": "10",
     "name": "Жолуденко Поліна Ігорівна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -81,6 +85,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-11",
+    "studentId": "11",
     "name": "Заярна Валерія Сергіївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -101,6 +106,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "kasieiev-danylo",
+    "studentId": "13",
     "name": "Касєєв Данило Павлович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -121,6 +127,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "kolyshkin-andrii",
+    "studentId": "15",
     "name": "Колишкін Андрій Юрійович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -141,6 +148,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-17",
+    "studentId": "17",
     "name": "Кохан Ольга Сергіївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -161,6 +169,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "koshelieva-myroslava",
+    "studentId": "18",
     "name": "Кошелєва Мирослава Сергіївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -181,6 +190,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-19",
+    "studentId": "19",
     "name": "Краснянський Ростислав Віталійович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -201,6 +211,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "milenina-mariia",
+    "studentId": "23",
     "name": "Міленіна Марія Олегівна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -221,6 +232,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-24",
+    "studentId": "24",
     "name": "Мойсієнко Віталіна Денисівна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -241,6 +253,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-27",
+    "studentId": "27",
     "name": "Неня Анастасія Миколаївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -261,6 +274,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "oleinykov-daniil",
+    "studentId": "28",
     "name": "Олейников Данііл Денисович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -281,6 +295,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "pozniak-artur",
+    "studentId": "31",
     "name": "Позняк Артур Русланович",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -301,6 +316,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-32",
+    "studentId": "32",
     "name": "Рожанківська Іванна Орестівна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -321,6 +337,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "chynionova-dasha",
+    "studentId": "34",
     "name": "Чиньонова Дар`я Олексіївна",
     "group": "РЕМС-44",
     "role": "Режисура естради і шоу",
@@ -341,6 +358,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-1",
+    "studentId": "1",
     "name": "Баленко Ілля Вікторович",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -361,6 +379,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-4",
+    "studentId": "4",
     "name": "Вознюк Олександра Миколаївна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -381,6 +400,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-5",
+    "studentId": "5",
     "name": "Волошина Дар'я Олександрівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -401,6 +421,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "davydova-svitlana",
+    "studentId": "7",
     "name": "Давидова Світлана Олександрівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -421,6 +442,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-8",
+    "studentId": "8",
     "name": "Данільчук Катерина Павлівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -441,6 +463,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-9",
+    "studentId": "9",
     "name": "Дубина Віолетта Володимирівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -461,6 +484,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-12",
+    "studentId": "12",
     "name": "Карпенко Рімма Романівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -481,6 +505,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-14",
+    "studentId": "14",
     "name": "Кириленко Михайло Володимирович",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -501,6 +526,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-16",
+    "studentId": "16",
     "name": "Коткова Анастасія Андріївна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -521,6 +547,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-20",
+    "studentId": "20",
     "name": "Кропивка Маргарита Анатоліївна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -541,6 +568,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-21",
+    "studentId": "21",
     "name": "Лещинський Денис Віталійович",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -561,6 +589,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "maksimova-samira",
+    "studentId": "22",
     "name": "Максімова Саміра Вадимівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -581,6 +610,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-25",
+    "studentId": "25",
     "name": "Мороз Марія Геннадіївна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -601,6 +631,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-26",
+    "studentId": "26",
     "name": "Мостова Яна Олегівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -621,6 +652,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-29",
+    "studentId": "29",
     "name": "Павлова Катерина Володимирівна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -641,6 +673,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "control-30",
+    "studentId": "30",
     "name": "Піддубна Марія Анатоліївна",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
@@ -661,6 +694,7 @@ window.REMS44_STUDENTS = [
   },
   {
     "id": "tashuta-artem",
+    "studentId": "33",
     "name": "Ташута Артем Анатолійович",
     "group": "РЕМС-34",
     "role": "Режисура естради і шоу",
