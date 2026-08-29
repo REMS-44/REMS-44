@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js?v=23";
+import { getPublicStudents } from "./public-data.js?v=26";
 
 const profileContainer=document.getElementById("studentProfile");
 const params=new URLSearchParams(window.location.search);
@@ -246,6 +246,13 @@ function renderPrograms(programs){
   const items=(Array.isArray(programs)?programs:[]).filter(Boolean);
   return items.length?`<section class="portfolio-card"><h2>Програми та інструменти</h2><div class="skills-list">${items.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:"";
 }
+
+function renderControlProjects(items){
+  const rows=(Array.isArray(items)?items:[]).filter(x=>x&&x.name);
+  if(!rows.length) return "";
+  return `<section class="portfolio-card"><h2>Проєкти в REMS</h2><div class="skills-list public-project-list">${rows.map(x=>`<span class="skill-item"><b>${esc(x.name)}</b>${x.role?` · ${esc(x.role)}`:""}</span>`).join("")}</div></section>`;
+}
+
 function renderProfileLinks(items){
   const rows=(Array.isArray(items)?items:[]).filter(x=>x&&x.url); if(!rows.length)return "";
   return `<section class="portfolio-card"><h2>Посилання та роботи</h2><div class="profile-work-links">${rows.map((x,i)=>`<a class="profile-work-link" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(x.label||`Робота ${i+1}`)}</span><b>Відкрити ↗</b></a>`).join("")}</div></section>`;
@@ -289,6 +296,7 @@ if(!student){
           ${renderPublicFacts(student.publicFacts)}
           ${skills.length?`<section class="portfolio-card"><h2>Професійні напрями та навички</h2><div class="skills-list">${skills.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:""}
           ${renderPrograms(student.programs)}
+          ${renderControlProjects(student.projects)}
           ${student.structuredExperience?.length?renderStructuredExperience(student.structuredExperience):renderExperience(split.experience)}
           ${renderProfileLinks(student.links)}
           ${renderCustomSections(student.customSections)}
