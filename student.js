@@ -246,6 +246,19 @@ function renderPrograms(programs){
   const items=(Array.isArray(programs)?programs:[]).filter(Boolean);
   return items.length?`<section class="portfolio-card"><h2>Програми та інструменти</h2><div class="skills-list">${items.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:"";
 }
+function renderProfileLinks(items){
+  const rows=(Array.isArray(items)?items:[]).filter(x=>x&&x.url); if(!rows.length)return "";
+  return `<section class="portfolio-card"><h2>Посилання та роботи</h2><div class="profile-work-links">${rows.map((x,i)=>`<a class="profile-work-link" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(x.label||`Робота ${i+1}`)}</span><b>Відкрити ↗</b></a>`).join("")}</div></section>`;
+}
+function renderCustomSections(sections){
+  const rows=(Array.isArray(sections)?sections:[]).filter(x=>x&&x.title);
+  return rows.map(x=>{
+    const items=(Array.isArray(x.items)?x.items:[]).filter(Boolean);
+    const body=items.length?`<div class="skills-list">${items.map(v=>`<span class="skill-item">${esc(v)}</span>`).join("")}</div>`:(x.text?`<div class="bio-copy"><p>${esc(x.text)}</p></div>`:"");
+    return body?`<section class="portfolio-card"><h2>${esc(x.title)}</h2>${body}</section>`:"";
+  }).join("");
+}
+
 function renderStructuredExperience(items){
   const rows=(Array.isArray(items)?items:[]).filter(x=>x&&x.project);
   if(!rows.length) return "";
@@ -277,6 +290,8 @@ if(!student){
           ${skills.length?`<section class="portfolio-card"><h2>Професійні напрями та навички</h2><div class="skills-list">${skills.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:""}
           ${renderPrograms(student.programs)}
           ${student.structuredExperience?.length?renderStructuredExperience(student.structuredExperience):renderExperience(split.experience)}
+          ${renderProfileLinks(student.links)}
+          ${renderCustomSections(student.customSections)}
           ${renderVideos(student.videos)}
           ${renderGallery(student.gallery)}
           ${renderSocials(student.socials)}
