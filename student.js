@@ -1,4 +1,4 @@
-import { getPublicStudents } from "./public-data.js?v=10";
+import { getPublicStudents } from "./public-data.js?v=22";
 
 const profileContainer=document.getElementById("studentProfile");
 const params=new URLSearchParams(window.location.search);
@@ -189,6 +189,40 @@ function renderGallery(gallery){
   const items=(Array.isArray(gallery)?gallery:[]).filter(Boolean);
   return items.length?`<section class="portfolio-card"><h2>Галерея</h2><div class="gallery-grid">${items.map(src=>`<img src="${esc(src)}" alt="" loading="lazy">`).join("")}</div></section>`:"";
 }
+function ageYearsMonths(birthDate){
+  const m=String(birthDate||"").match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return null;
+  const b=new Date(+m[1],+m[2]-1,+m[3]), now=new Date();
+  let years=now.getFullYear()-b.getFullYear();
+  let months=now.getMonth()-b.getMonth();
+  if(now.getDate()<b.getDate()) months--;
+  if(months<0){years--;months+=12;}
+  return {years,months};
+}
+function renderPublicFacts(facts){
+  const f=facts||{}; const rows=[];
+  const age=ageYearsMonths(f.birthDate);
+  if(age) rows.push(["Вік",`${age.years}<sup>${age.months}</sup>`]);
+  if(f.playingAge) rows.push(["Ігровий вік",esc(f.playingAge)]);
+  if(f.height) rows.push(["Зріст",`${esc(f.height)}${/\d/.test(f.height)&&!/см/i.test(f.height)?" см":""}`]);
+  if(f.clothingSize) rows.push(["Одяг",esc(f.clothingSize)]);
+  if(f.shoeSize) rows.push(["Взуття",esc(f.shoeSize)]);
+  if(f.type) rows.push(["Типаж",esc(f.type)]);
+  if(f.hair) rows.push(["Волосся",esc(f.hair)]);
+  if(f.eyes) rows.push(["Очі",esc(f.eyes)]);
+  if(f.special) rows.push(["Особливі навички",esc(f.special)]);
+  return rows.length?`<section class="portfolio-card"><h2>Дані для підбору</h2><div class="public-facts">${rows.map(([k,v])=>`<div class="public-fact"><span>${k}</span><b>${v}</b></div>`).join("")}</div></section>`:"";
+}
+function renderPrograms(programs){
+  const items=(Array.isArray(programs)?programs:[]).filter(Boolean);
+  return items.length?`<section class="portfolio-card"><h2>Програми та інструменти</h2><div class="skills-list">${items.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:"";
+}
+function renderStructuredExperience(items){
+  const rows=(Array.isArray(items)?items:[]).filter(x=>x&&x.project);
+  if(!rows.length) return "";
+  const groups=new Map();
+  rows.forEach(x=>{const key=String(x.category||"Професійний досвід").trim()||"Професійний досвід"; if(!groups.has(key)) groups.set(key,[]); groups.get(key).push(x);});
+  return `<section class="portfolio-card"><h2>Професійний досвід</h2><div class="experience-groups structured-public-experience">${[...groups.entries()].map(([title,list])=>`<div class="experience-group"><h3>${esc(title)}</h3><div class="experience-timeline">${list.map(x=>`<div class="experience-row"><div class="experience-date">${esc(x.period||"")}</div><div class="experience-text"><b>${esc(x.project)}</b>${x.role?`<span>${esc(x.role)}</span>`:""}</div></div>`).join("")}</div></div>`).join("")}</div></section>`;
+}
 
 if(!student){
   profileContainer.innerHTML=`<div class="not-found"><h1>Студента не знайдено</h1><a href="index.html#students">← Усі студенти</a></div>`;
@@ -209,8 +243,10 @@ if(!student){
 
         <div class="portfolio-stack">
           ${split.bio.length?`<section class="portfolio-card"><h2>Про себе</h2><div class="bio-copy">${split.bio.map(p=>`<p>${esc(p)}</p>`).join("")}</div></section>`:""}
-          ${skills.length?`<section class="portfolio-card"><h2>Навички та інтереси</h2><div class="skills-list">${skills.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:""}
-          ${renderExperience(split.experience)}
+          ${renderPublicFacts(student.publicFacts)}
+          ${skills.length?`<section class="portfolio-card"><h2>Професійні напрями та навички</h2><div class="skills-list">${skills.map(x=>`<span class="skill-item">${esc(x)}</span>`).join("")}</div></section>`:""}
+          ${renderPrograms(student.programs)}
+          ${student.structuredExperience?.length?renderStructuredExperience(student.structuredExperience):renderExperience(split.experience)}
           ${renderVideos(student.videos)}
           ${renderGallery(student.gallery)}
           ${renderSocials(student.socials)}

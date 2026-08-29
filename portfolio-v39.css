@@ -216,3 +216,12 @@ body.profile-page{
     white-space:normal;
   }
 }
+
+/* v4.0 — REMS Control public professional sync */
+.profile-page .public-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.profile-page .public-fact{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;display:grid;gap:4px}
+.profile-page .public-fact span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.58}
+.profile-page .public-fact b{font-size:16px}.profile-page .public-fact sup{font-size:.58em;margin-left:2px;vertical-align:super;opacity:.65}
+.profile-page .structured-public-experience .experience-text{display:grid;gap:4px}
+.profile-page .structured-public-experience .experience-text b{font-size:14px}
+.profile-page .structured-public-experience .experience-text span{font-size:12px;opacity:.72;line-height:1.45}
