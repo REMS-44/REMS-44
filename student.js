@@ -1,10 +1,40 @@
-import { getPublicStudents } from "./public-data.js?v=22";
+import { getPublicStudents } from "./public-data.js?v=23";
 
 const profileContainer=document.getElementById("studentProfile");
 const params=new URLSearchParams(window.location.search);
-const studentId=params.get("id");
+const requestedId=String(params.get("id")||"").trim();
+const requestedStudentId=String(params.get("studentId")||"").trim();
 const students=await getPublicStudents(window.REMS44_STUDENTS||[]);
-const student=students.find(item=>item.id===studentId);
+
+const normId=v=>String(v||"").trim().toLowerCase();
+const normName=v=>String(v||"")
+  .toLowerCase()
+  .replace(/[’`ʼ]/g,"'")
+  .replace(/[^a-zа-яіїєґ0-9' ]/gi," ")
+  .replace(/\s+/g," ")
+  .trim();
+const legacyAliases={
+  "vlasenko-daria":"vlasenko-dasha",
+  "vlasenko-darya":"vlasenko-dasha",
+  "vlasenko-darja":"vlasenko-dasha",
+  "vlasenko-dar-ia":"vlasenko-dasha",
+  "vlasenko-dar'ia":"vlasenko-dasha"
+};
+const wantedId=legacyAliases[normId(requestedId)]||normId(requestedId);
+let student=students.find(item=>normId(item.id)===wantedId);
+if(!student && requestedStudentId){
+  student=students.find(item=>String(item.studentId||"")===requestedStudentId);
+}
+// Fail-safe for old/bookmarked links: try the static catalogue too.
+if(!student){
+  const fallback=window.REMS44_STUDENTS||[];
+  student=fallback.find(item=>normId(item.id)===wantedId);
+}
+// Final fail-safe: if an old link contains a readable name, resolve by person name.
+if(!student && params.get("name")){
+  const wantedName=normName(params.get("name"));
+  student=students.find(item=>normName(item.name)===wantedName);
+}
 
 function esc(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({

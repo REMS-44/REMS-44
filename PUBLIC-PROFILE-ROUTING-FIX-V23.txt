@@ -1,0 +1,7 @@
+REMS-44 v23 — public profile routing fix
+
+- Unified cache versions for students.js, index.js, student.js and public-data.js.
+- Added resilient student profile resolution by id and studentId.
+- Added legacy aliases for Vlasenko links.
+- Added static-catalogue fallback so a cloud merge mismatch cannot produce a false "student not found" page.
+- Audited static catalogue: 34 unique student IDs, no duplicates.
