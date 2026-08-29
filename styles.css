@@ -1990,3 +1990,16 @@ footer p {
 }
 
 .profile-work-links{display:grid;gap:10px}.profile-work-link{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 14px;border:1px solid rgba(255,255,255,.14);border-radius:12px;text-decoration:none;color:inherit}.profile-work-link b{white-space:nowrap}
+
+
+/* v29 · public navigation cleanup */
+.hero-sections-v404 .hero-section-instagram {
+  background: rgba(255,255,255,.08);
+}
+.hero-sections-v404 .hero-section-instagram:hover {
+  transform: translateY(-2px);
+}
+.hero-sections-v404 .hero-section-instagram .hero-section-number,
+.hero-sections-v404 .hero-section-instagram .hero-section-arrow {
+  opacity: .9;
+}
